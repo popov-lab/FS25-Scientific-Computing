@@ -1,0 +1,6 @@
+---
+title: Solutions to exercises
+listing:
+  contents: solutions
+  type: table
+---

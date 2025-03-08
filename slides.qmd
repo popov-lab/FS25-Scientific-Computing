@@ -1,0 +1,6 @@
+---
+title: Course slides
+listing:
+  contents: slides
+  type: table
+---

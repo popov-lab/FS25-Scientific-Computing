@@ -1,7 +1,7 @@
 ---
-title: "Curves & Plots"
+title: "E005: Curves & Plots"
 author: "Hubert Baechli"
-date: "`r Sys.Date()`"
+date: "2025-03-08"
 ---
 
 ```{r setup, include=FALSE}

@@ -1,7 +1,7 @@
 ---
-title: "Numbers & rounding them"
+title: "E003: Numbers & rounding them"
 author: "Hubert Baechli"
-date: "`r Sys.Date()`"
+date: "2025-03-08"
 ---
 
 ```{r setup, include=FALSE}

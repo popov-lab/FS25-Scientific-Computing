@@ -1,0 +1,25 @@
+---
+title: FS25 Introduction to programming and scientific computing
+---
+
+Course materials for University of Zurich FS25 Introduction to Programming and Scientific Computing masters course
+
+## Course description
+
+This course provides a comprehensive introduction to programming and scientific computing tailored for master's students in psychology. It is designed to equip students with foundational programming skills and the computational tools necessary for modern research and data analysis in both academic and industry settings.
+ 
+Students will learn core programming concepts, including data structures, control statements, loops, custom function creation, code optimization, and debugging. The course will emphasize practical skills, such as working with a command-line terminal, implementing version control with Git and GitHub, and structuring and organizing coding projects for clarity and reproducibility.
+Advanced topics will include parallelization techniques and deploying code on high-performance computing clusters.
+ 
+Good coding practices, including documentation, testing, and maintaining clean, efficient code, will be a central focus, ensuring students are prepared for collaborative and reproducible research environments.
+ 
+The skills developed in this course will lay the groundwork for more advanced courses in the program and are directly applicable to coding psychological experiments, implementing advanced analytic techniques, and developing computational models. By the end of the course, students will have the confidence and competence to apply programming to solve complex research problems and bridge the gap between computational methods and psychological inquiry.
+
+## Learning outcomes
+
+- Be able to use git & Github for version control and sharing code
+- Be able to work with a command line interface
+- Be able to create reproducible software projects in R
+- Understand absolute and relative filepaths and how to organize software projects and code
+- Be able to use if/else statements, for/while statements, and write custom functions in R
+- Understand how to store data and access data in different data structures such as vectors, lists, data.frames. matrices and so on

@@ -1,0 +1,164 @@
+---
+title: "Numbers & rounding them"
+author: "Hubert Baechli"
+date: "`r Sys.Date()`"
+output: pdf_document
+header-includes:
+  - \usepackage{xcolor}
+  - \usepackage{titlesec}
+  - \titleformat{\subsubsection}[block]{\normalfont\normalsize\bfseries\color{green}}{}{0em}{}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo = FALSE}
+GAP <- 1
+Echo <- FALSE
+```
+
+# Programming exercise
+
+Below are some exercises that should help you learn the most important basic built in functions and how to incorporate them into your own functions. This sheet focuses on numbers and how the could rounded.
+
+## 1. Basic math (easy)
+
+as you already know, you can do simple math with R
+
+```{r}
+x <- 4
+y <- 2
+z <- x * y ** 2
+z
+```
+
+But R can do almost everything that can be done with numbers, also with vectors of numbers.
+
+```{r}
+x <- c(4, 3)
+z <- x * y ** 2
+z
+```
+
+***And it becomes even easier when you wrap it in functions. So create a function that performs the calculation shown above.***
+
+```{r, echo = FALSE}
+calc_z <- function(x, y) {
+  z <-  x * y ** 2
+  return(z)
+}
+```
+
+```{r}
+calc_z(x = 2, y = 4)
+```
+
+*Hint: Your function should also work with vectors or with combinations*
+
+```{r}
+calc_z(x = c(4,3), y = 2)
+calc_z(x = c(4,3), y = c(1,2))
+```
+
+## 2. Round numbers (easy)
+
+You used already the round function, may with such a line
+
+```{r}
+round(pi,2)
+```
+
+R is very flexible and has interpreted this as follows:
+
+```{r}
+round(x = pi, digits = 2)
+```
+
+But R also has many other built-in functions, such as rounding up.
+
+```{r}
+ceiling(x = pi)
+```
+
+***Guess the function which's rounding down ;-)***
+
+```{r, echo = FALSE}
+floor(x = pi)
+```
+
+## 3. Even/Odd (medium)
+
+To my knowledge, there is no built-in function that checks whether a number is even or odd.
+
+***But we can write one ourselves.***
+
+*Hint: Try to use the integer operators for the solution.*
+
+```{r}
+5 %% 2
+5 %/% 2
+```
+
+```{r, echo = FALSE}
+is_even <- function(x){
+  res <- (x %% 2 == 0)
+  return(res)
+}
+```
+
+```{r}
+is_even(x = 4)
+```
+
+## 3. Round even (hard)
+
+It is probably more interesting to have a function that rounds a number to the nearest even number.
+
+***Your function should do this***
+
+```{r, echo = FALSE}
+round_even <- function(x){
+  res <- x %/% 2
+  if (x %% 2 >= 1){
+    res <- res + 1
+    }
+  res <- res * 2
+  return(res)
+}
+```
+
+```{r}
+round_even(x = 2*pi)
+```
+
+## 4. Round even for vectors (combined)
+
+And just like the built-in functions, it would be nice if this also works with vectors. ***But mine is not doing that :-(***
+
+***If yours is not working either, write an additional function that can handle it.***
+
+*Hint: You may use a loop where you can let your first function run in it.*
+
+```{r, echo = FALSE}
+vec_round_even <- function(x){
+  vec <- c() 
+  for (i in seq_along(x)) {
+    vec[i] <- round_even(x[i])
+  }
+  return(vec)
+}
+
+```
+
+```{r}
+vec_round_even(x= c(pi,2*pi,10*pi))
+```
+
+```{r, echo = FALSE}
+round_even <- function(x){
+  res <- x %/% 2 + floor(x %% 2)
+  res <- res * 2
+  return(res)
+}
+```

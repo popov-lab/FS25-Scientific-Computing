@@ -1,8 +1,0 @@
----
-title: Exercises
-listing:
-  contents: exercises
-  type: table
----
-
-These exercises are meant to help you practice some of the core R skills you have learned. Each listing starts with easy tasks and provides incrementally harder assignments. 

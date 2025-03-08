@@ -1,0 +1,401 @@
+[
+  {
+    "objectID": "solutions.html",
+    "href": "solutions.html",
+    "title": "Solutions to exercises",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nInvalid Date\n\n\ncalculating PI\n\n\nHubert Baechli\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "exercises/E004_sequences.html",
+    "href": "exercises/E004_sequences.html",
+    "title": "E004: Vectors & Sequences",
+    "section": "",
+    "text": "Below are some exercises that should help you learn the most important basic built in functions and how to incorporate them into your own functions. This sheet focuses on vectors and how the easily generated.\n\n\nThe most challenging aspect of R is probably its flexibility. All these lines do exactly the same thing!\n\nvec_z &lt;- 1:6\nvec_z &lt;- seq(1, 6)\nvec_z &lt;- seq(1, 6, 1)\nvec_z &lt;- seq(from = 1, to = 6, by = 1)\nvec_z &lt;- seq_len(6)\nvec_z\n\n[1] 1 2 3 4 5 6\n\n\nTry to generate this sequence\n\n\n[1] 1 3 5\n\n\n\n\n\nA second way to generate vectors is by using this:\n\nrep(x = 5, times = 4)\n\n[1] 5 5 5 5\n\n\nTry to generate this sequence\n\n\n[1] 1 3 1 3 1 3 1 3\n\n\nAnd try now to generate this sequence with the same function\nHint: you will need a other parameter then times (?rep)\n\n\n[1] 1 1 1 1 3 3 3 3\n\n\n\n\n\nAs you can see, the built-in functions are very flexible and can define many diferent vectors. Now for something trickier.\nCreate a function that takes a single integer n and generates a sequence with all natural numbers from 1 to n, such that each number x is repeated x number of times. Here are some examples of desired output:\n\nincremental_seq(1)\n\n[1] 1\n\nincremental_seq(2)\n\n[1] 1 2 2\n\nincremental_seq(3)\n\n[1] 1 2 2 3 3 3\n\nincremental_seq(4)\n\n [1] 1 2 2 3 3 3 4 4 4 4\n\nincremental_seq(5)\n\n [1] 1 2 2 3 3 3 4 4 4 4 5 5 5 5 5\n\n\n\n\n\n\n\n\nTip\n\n\n\nRead carefully the documentation for the rep function by typing ?rep or help(rep) in the R console. Specifically look at the explanation of the times argument in the Details section. What happens when times is not a single number but a vector instead?\n\n\n\n\n\nIn this task you have to do almost the reverse of the previous. Given a vector of items, determine how often each item is repeated in an uninterupted sequence and print a summary. Example output:\n\nsummarise_reps(c(\"A\", \"A\", \"A\", \"B\", \"C\", \"C\", \"M\", \"M\", \"M\", \"M\", \"A\", \"A\"))\n\nValue: A, Reps: 3\nValue: B, Reps: 1\nValue: C, Reps: 2\nValue: M, Reps: 4\nValue: A, Reps: 2\n\n\n\n\n\n\n\n\nTip\n\n\n\nYou can do this with low-level functions. You could also search for a concept called “Run Length Encoding”. Is there a base R function that computes the run length encoding? What type of object does it return? How can you extract the information you need from that object?"
+  },
+  {
+    "objectID": "exercises/E004_sequences.html#by-sequences-easy",
+    "href": "exercises/E004_sequences.html#by-sequences-easy",
+    "title": "E004: Vectors & Sequences",
+    "section": "",
+    "text": "The most challenging aspect of R is probably its flexibility. All these lines do exactly the same thing!\n\nvec_z &lt;- 1:6\nvec_z &lt;- seq(1, 6)\nvec_z &lt;- seq(1, 6, 1)\nvec_z &lt;- seq(from = 1, to = 6, by = 1)\nvec_z &lt;- seq_len(6)\nvec_z\n\n[1] 1 2 3 4 5 6\n\n\nTry to generate this sequence\n\n\n[1] 1 3 5"
+  },
+  {
+    "objectID": "exercises/E004_sequences.html#by-repetitions-medium",
+    "href": "exercises/E004_sequences.html#by-repetitions-medium",
+    "title": "E004: Vectors & Sequences",
+    "section": "",
+    "text": "A second way to generate vectors is by using this:\n\nrep(x = 5, times = 4)\n\n[1] 5 5 5 5\n\n\nTry to generate this sequence\n\n\n[1] 1 3 1 3 1 3 1 3\n\n\nAnd try now to generate this sequence with the same function\nHint: you will need a other parameter then times (?rep)\n\n\n[1] 1 1 1 1 3 3 3 3"
+  },
+  {
+    "objectID": "exercises/E004_sequences.html#repetitions-each-medium",
+    "href": "exercises/E004_sequences.html#repetitions-each-medium",
+    "title": "E004: Vectors & Sequences",
+    "section": "",
+    "text": "As you can see, the built-in functions are very flexible and can define many diferent vectors. Now for something trickier.\nCreate a function that takes a single integer n and generates a sequence with all natural numbers from 1 to n, such that each number x is repeated x number of times. Here are some examples of desired output:\n\nincremental_seq(1)\n\n[1] 1\n\nincremental_seq(2)\n\n[1] 1 2 2\n\nincremental_seq(3)\n\n[1] 1 2 2 3 3 3\n\nincremental_seq(4)\n\n [1] 1 2 2 3 3 3 4 4 4 4\n\nincremental_seq(5)\n\n [1] 1 2 2 3 3 3 4 4 4 4 5 5 5 5 5\n\n\n\n\n\n\n\n\nTip\n\n\n\nRead carefully the documentation for the rep function by typing ?rep or help(rep) in the R console. Specifically look at the explanation of the times argument in the Details section. What happens when times is not a single number but a vector instead?"
+  },
+  {
+    "objectID": "exercises/E004_sequences.html#count-repetitions-harder",
+    "href": "exercises/E004_sequences.html#count-repetitions-harder",
+    "title": "E004: Vectors & Sequences",
+    "section": "",
+    "text": "In this task you have to do almost the reverse of the previous. Given a vector of items, determine how often each item is repeated in an uninterupted sequence and print a summary. Example output:\n\nsummarise_reps(c(\"A\", \"A\", \"A\", \"B\", \"C\", \"C\", \"M\", \"M\", \"M\", \"M\", \"A\", \"A\"))\n\nValue: A, Reps: 3\nValue: B, Reps: 1\nValue: C, Reps: 2\nValue: M, Reps: 4\nValue: A, Reps: 2\n\n\n\n\n\n\n\n\nTip\n\n\n\nYou can do this with low-level functions. You could also search for a concept called “Run Length Encoding”. Is there a base R function that computes the run length encoding? What type of object does it return? How can you extract the information you need from that object?"
+  },
+  {
+    "objectID": "exercises/E005_curves_plots.html",
+    "href": "exercises/E005_curves_plots.html",
+    "title": "E005: Curves & Plots",
+    "section": "",
+    "text": "Warning\n\n\n\nThis set of exercises is not fully ready and will be improved over the next few days. Do at your own risk ;)"
+  },
+  {
+    "objectID": "exercises/E005_curves_plots.html#calculating-a-sine-wave-e003",
+    "href": "exercises/E005_curves_plots.html#calculating-a-sine-wave-e003",
+    "title": "E005: Curves & Plots",
+    "section": "1. Calculating a Sine wave (E003)",
+    "text": "1. Calculating a Sine wave (E003)\nTo begin, we need a function that calculates the sine.\nHint: implement at least these parameters, if you like you can also add offsets.\n\nx &lt;- pi\namp &lt;- 2\nfreq &lt;- 0.5\n\ny &lt;- amp * sin(freq * x)\ny\n\n[1] 2\n\n\nYour function now should do this\n\ncalc_sin(x = pi, amp = 2, freq = 0.5)\n\n[1] 2\n\n\nand it should also work with a vector\nHint: sequences you learned in E004\n\nx &lt;- seq(from = 0, to = 4 * pi, by = pi / 4)\ny &lt;- calc_sin(x = x, amp = 2, freq = 0.5)\ny\n\n [1]  0.000000e+00  7.653669e-01  1.414214e+00  1.847759e+00  2.000000e+00\n [6]  1.847759e+00  1.414214e+00  7.653669e-01  2.449294e-16 -7.653669e-01\n[11] -1.414214e+00 -1.847759e+00 -2.000000e+00 -1.847759e+00 -1.414214e+00\n[16] -7.653669e-01 -4.898587e-16"
+  },
+  {
+    "objectID": "exercises/E005_curves_plots.html#ploting-a-curve-combined",
+    "href": "exercises/E005_curves_plots.html#ploting-a-curve-combined",
+    "title": "E005: Curves & Plots",
+    "section": "2. Ploting a curve (combined)",
+    "text": "2. Ploting a curve (combined)\nSince the previous result is not easy to verify, let’s create a plot of these results.\n\nplot(x, y,\n  type = \"l\", col = \"blue\", lwd = 2,\n  xlab = \"x\", ylab = \"y\", main = \"Sine curve\"\n)\n\n\n\n\n\n\n\n\nYou are already familiar with functions that return text or numbers. In R, however, it is also possible to write functions that generates directly plots.\n\nplot_sin &lt;- function(x, GAP) {\n  y &lt;- GAP # calc_sin\n  title &lt;- GAP\n  return(plot(x, y, GAP))\n}\n\nYou should got a function which does something like that\nHint: Use “E002”-skills for customizing your title\n\nx &lt;- seq(from = 0, to = 4 * pi, by = pi / 25)\nplot_sin(x = x, amp = 2, freq = 1, color = \"green\")"
+  },
+  {
+    "objectID": "exercises/E005_curves_plots.html#add-a-reverence-curve-outlook",
+    "href": "exercises/E005_curves_plots.html#add-a-reverence-curve-outlook",
+    "title": "E005: Curves & Plots",
+    "section": "3. Add a reverence curve (Outlook)",
+    "text": "3. Add a reverence curve (Outlook)\nOnce the basic building blocks are in place, it becomes easier to add further enhancements. Here, for example, is a reference curve added.\n\nplot_sin_rev(x = x, amp = 2, freq = 2, color = \"green\")\n\n\n\n\n\n\n\n\n\nplot_sin_rev(x = x, amp = 2, freq = 1, yoffset = 1, color = \"green\")"
+  },
+  {
+    "objectID": "exercises.html",
+    "href": "exercises.html",
+    "title": "Exercises",
+    "section": "",
+    "text": "These exercises are meant to help you practice some of the core R skills you have learned. Each listing starts with easy tasks and provides incrementally harder assignments.\n\n\n\n\n\n\n   \n     \n     \n       Order By\n       Default\n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nDate\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nFeb 26, 2025\n\n\nE001: Calculating PI\n\n\nHubert Baechli\n\n\n\n\nMar 8, 2025\n\n\nE002: Manipulating strings\n\n\nHubert Baechli\n\n\n\n\nMar 8, 2025\n\n\nE003: Numbers & rounding them\n\n\nHubert Baechli\n\n\n\n\nMar 8, 2025\n\n\nE004: Vectors & Sequences\n\n\nHubert Baechli\n\n\n\n\nMar 8, 2025\n\n\nE005: Curves & Plots\n\n\nHubert Baechli\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "slides/week1.html#fundamentals-of-programming-for-scientific-computing",
+    "href": "slides/week1.html#fundamentals-of-programming-for-scientific-computing",
+    "title": "FS25 “What I wish someone taught me 10 years ago”",
+    "section": "Fundamentals of programming for scientific computing",
+    "text": "Fundamentals of programming for scientific computing\n\nscientists are not programmers and have their own training requirements\ntypically haphazard training in the social sciences, statistics and related fields\nonline tutorials focus on specific technologies and languages\nneed for training of core concepts, practices and skills\nnot a computer science degree, not an in-depth math education, nor a mastery of a particular language\na mixture of all, focused on doing with understanding\nexposure to most important concepts, even advanced ones\na blueprint so that you now what you need to know long-term"
+  },
+  {
+    "objectID": "slides/week1.html#section",
+    "href": "slides/week1.html#section",
+    "title": "FS25 “What I wish someone taught me 10 years ago”",
+    "section": "",
+    "text": "Doing with understanding\n\ncourses focused entirely on practice risk missing the big picture and transferable skills\ncourses focused entirely on theory risk disconnectedness\nbuild a robust mental model of computation and software engineering\n\nWhy R?\n\na.k.a. why not Python, JavaScript, Julia, C or whatever\npracticality\nfocus is on transferable concept and skills\n\nEarly wins\n\nget to make/do something exciting right away\nincrementally work towards a final project\noptional paths"
+  },
+  {
+    "objectID": "slides/week1.html#what-is-computation-some-background",
+    "href": "slides/week1.html#what-is-computation-some-background",
+    "title": "FS25 “What I wish someone taught me 10 years ago”",
+    "section": "What is computation? Some background",
+    "text": "What is computation? Some background\n\n\n\nask students to speak out ideas - what they understand?\n\n\n\n\nComputation vs programming\nFirst computer\n\nA lock\nHumans\n\nTuring machines\n\nTuring complete\nGame of life\n\nLow-level languages\n\nMachine code\nPunch cards\nAssembly language\n\nHigh-level languages\n\nCompiling vs interpreting"
+  },
+  {
+    "objectID": "slides/week1.html#abstractions",
+    "href": "slides/week1.html#abstractions",
+    "title": "FS25 “What I wish someone taught me 10 years ago”",
+    "section": "Abstractions",
+    "text": "Abstractions\n\nexpressing intent vs implementation\ndata structures\nalgorithms\ncore concepts\n\nvariables\nfunctions\nscope"
+  },
+  {
+    "objectID": "slides/week1.html#class-structure",
+    "href": "slides/week1.html#class-structure",
+    "title": "FS25 “What I wish someone taught me 10 years ago”",
+    "section": "Class structure",
+    "text": "Class structure\n\n\nfor (week in 1:14) {\n\n  if (week %% 2 == 1) {\n    type = \"Lecture\"\n  } else {\n    type = \"Practice\"\n  }\n\n  cat(\"Week \", week, \": \", type, \"\\n\", sep = \"\")\n}\n\n\nWeek 1: Lecture\nWeek 2: Practice\nWeek 3: Lecture\nWeek 4: Practice\nWeek 5: Lecture\nWeek 6: Practice\nWeek 7: Lecture\nWeek 8: Practice\nWeek 9: Lecture\nWeek 10: Practice\nWeek 11: Lecture\nWeek 12: Practice\nWeek 13: Lecture\nWeek 14: Practice\n\n\n\n\nthis is actual code embeded in the slide that produced the result (not copy paste from a separate program)\nduring some of these weeks you will also learn why this is not great code"
+  },
+  {
+    "objectID": "slides/week1.html#outlook-rough-list-of-topics-to-cover",
+    "href": "slides/week1.html#outlook-rough-list-of-topics-to-cover",
+    "title": "FS25 “What I wish someone taught me 10 years ago”",
+    "section": "Outlook: Rough list of topics to cover",
+    "text": "Outlook: Rough list of topics to cover\n\n\n\n\nbasic programming concepts\n\ndata structures\ncontrol statements - if, while, loops\nfunctions\nobjects\nscope\nalgorithms\nrandomness, seeds, distributions\ntips & tricks\nproblem-solving\n\n\n\n\nfilesystem, project organization & command line tools\nversion control & collaboration\ndependency/environment management & cluster/cloud computing\nprofiling, optimization and debugging\ntesting, documentation & reporting\n(maybe: useful math refresher)"
+  },
+  {
+    "objectID": "slides/week1.html#learning-resources",
+    "href": "slides/week1.html#learning-resources",
+    "title": "FS25 “What I wish someone taught me 10 years ago”",
+    "section": "Learning resources",
+    "text": "Learning resources\n\nBeginners\n\nHands-on programming with R – if you know nothing about R, start here\nThe Art of R Programming\n\nBeginners with focus on data analysis (good, but not the focus of this course)\n\nR for Data Science - focused on data wrangling and visualization\nTelling Stories with Data - have not read it, but seems to be a higher level tour of tasks in data science focused on breath rather than depth"
+  },
+  {
+    "objectID": "slides/week1.html#learning-resources-1",
+    "href": "slides/week1.html#learning-resources-1",
+    "title": "FS25 “What I wish someone taught me 10 years ago”",
+    "section": "Learning resources",
+    "text": "Learning resources\n\nAdvanced\n\nAdvanced R - excellent for developing a deeper understanding of R\nR Packages - excellent guide for developing packages for R\nThe R Inferno - absolutely fantastic; about the tricky parts of the language\n\nWorkflow\n\nWhat they forgot to teach you about R - workflow related good advice\nBuilding reproducible analytical pipelines with R - a really good guide for improving reproducibility in R and generally for best coding practices"
+  },
+  {
+    "objectID": "solutions/E001s_calculating_PI.html",
+    "href": "solutions/E001s_calculating_PI.html",
+    "title": "calculating PI",
+    "section": "",
+    "text": "In contrast to the simple method described below, the first exercise should calculates our own PI.\n\npi\n\n[1] 3.141593\n\n\nThe following is a step-by-step guide to putting the first programming skills from the lesson into practice."
+  },
+  {
+    "objectID": "solutions/E001s_calculating_PI.html#step",
+    "href": "solutions/E001s_calculating_PI.html#step",
+    "title": "calculating PI",
+    "section": "1. Step",
+    "text": "1. Step\nGeneration of a random position for a single dart within a square. The square extends from -1 to +1 in the X-direction, as well as in the Y-direction.\nUse a random number generator for a uniform distribution and save the result in the two variables x and y (GAP are placeholder)\n\nx &lt;- runif(n=GAP,min=GAP,max=GAP)\ny &lt;- GAP\n\n\nFeasible solution\n\nx &lt;- runif(n=1,min=-1,max=1)\ny &lt;- runif(n=1,min=-1,max=1)"
+  },
+  {
+    "objectID": "solutions/E001s_calculating_PI.html#step-1",
+    "href": "solutions/E001s_calculating_PI.html#step-1",
+    "title": "calculating PI",
+    "section": "2. Step",
+    "text": "2. Step\nNow calculate the distance from this position to the center. You can use the following simplified formula for our chosen square\n\ndist &lt;- x**2 + y**2\nprint(dist)\n\n[1] 0.7474635"
+  },
+  {
+    "objectID": "solutions/E001s_calculating_PI.html#step-2",
+    "href": "solutions/E001s_calculating_PI.html#step-2",
+    "title": "calculating PI",
+    "section": "3. Step",
+    "text": "3. Step\nCreate a decision rule and print “inside” if the point is inside the circle or “outside” if it is not.\n\nif (dist &lt;= GAP){\n  GAP\n} else {\n  GAP\n}\n\n\nFeasible solution\n\nif (dist &lt;= 1){\n  print(\"inside\")\n  } else {\n  print(\"outside\")\n}\n\n[1] \"inside\""
+  },
+  {
+    "objectID": "solutions/E001s_calculating_PI.html#step-3",
+    "href": "solutions/E001s_calculating_PI.html#step-3",
+    "title": "calculating PI",
+    "section": "4. Step",
+    "text": "4. Step\nCreate now a loop (use for or while statement) and execute the code from steps 1 to 3 within it. You should get something like that now\nHint: Use may 10 iteration for the beginning\n\nFeasible solution\n\nfor (i in 1:10) {\n  x &lt;- runif(n=1,min=-1,max=1)\n  y &lt;- runif(n=1,min=-1,max=1)\n  dist &lt;- x**2 + y**2\n  if (dist &lt;= 1){\n    print(\"inside\")\n    } else {\n    print(\"outside\")\n  }\n}\n\n[1] \"inside\"\n[1] \"inside\"\n[1] \"inside\"\n[1] \"outside\"\n[1] \"inside\"\n[1] \"inside\"\n[1] \"inside\"\n[1] \"inside\"\n[1] \"inside\"\n[1] \"inside\""
+  },
+  {
+    "objectID": "solutions/E001s_calculating_PI.html#step-4",
+    "href": "solutions/E001s_calculating_PI.html#step-4",
+    "title": "calculating PI",
+    "section": "5. Step",
+    "text": "5. Step\nCopy now the code from Step 4 and modify it in a way that instead of outputting a result for each point, it sums up the number of “insides”.\nUse something like that,\n\nn_insides &lt;- 0\nn_insides &lt;- n_insides + 1\nprint(n_insides)\n\n[1] 1\n\n\nor more elegant write the results in a vector.\n\nv_insides &lt;- rep(x=0,10)\nv_insides[2] &lt;- 1\nprint(v_insides)\n\n [1] 0 1 0 0 0 0 0 0 0 0\n\n\nIf you use 1000 iteration you should became such a number\n\n\n[1] 804\n\n\n\nFeasible solution\n\nn &lt;- 1000\nv_insides &lt;- rep(x=0,n)\nfor (i in 1:n) {\n  x &lt;- runif(n=1,min=-1,max=1)\n  y &lt;- runif(n=1,min=-1,max=1)\n  dist &lt;- x**2 + y**2\n  if (dist &lt;= 1){\n    v_insides[i] &lt;- 1\n  }\n}"
+  },
+  {
+    "objectID": "solutions/E001s_calculating_PI.html#loops-and-decision-rules",
+    "href": "solutions/E001s_calculating_PI.html#loops-and-decision-rules",
+    "title": "calculating PI",
+    "section": "Loops and decision rules",
+    "text": "Loops and decision rules\nThese are very helpful because they are easy to read and interpret. However, they are very slow! Using the analogy Ven has used, each line is a page in a book. A loop means you constantly have to flip back and forth through the pages. In contrast, vector operations are much faster because it is already known in advance which operations need to be performed for the given values.\n\nHere a first example\nAlthough 10e8 iterations are performed here, it computes almost without any delay.\nHint: You may try to understand why this gives the same result.\n\nn &lt;- 1e8\ndata &lt;- data.frame(\n  x = runif(n=n,min=-1,max=1),\n  y = runif(n=n,min=-1,max=1)\n  )\ndata$dist &lt;- data$x*data$x + data$y*data$y\ndata$inside &lt;- 2 - ceiling(data$dist)\nSelfmade_pi_opt1 &lt;- sum(data$inside)/length(data$inside) * 4\n\nhead(data)\n\n           x           y      dist inside\n1  0.8771555 -0.08506678 0.7766381      1\n2  0.7046882 -0.28475429 0.5776705      1\n3  0.5319163 -0.38799774 0.4334772      1\n4  0.8814713 -0.30334503 0.8690099      1\n5 -0.2593019 -0.22595391 0.1182926      1\n6  0.5955902  0.18933788 0.3905766      1\n\n\nAs you can see, this way we already arrive a more precise solution much faster.\n\nselfmade_pi\n\n[1] 3.172\n\nSelfmade_pi_opt1\n\n[1] 3.141376\n\npi\n\n[1] 3.141593\n\n\nPlot of Dart-positions"
+  },
+  {
+    "objectID": "solutions/E001s_calculating_PI.html#other-ways-of-optimization",
+    "href": "solutions/E001s_calculating_PI.html#other-ways-of-optimization",
+    "title": "calculating PI",
+    "section": "Other ways of optimization",
+    "text": "Other ways of optimization\nR is a programming language for lazy people. Often, functions have preset default values, which in this example are even helpful. In others, it is very annoying because it makes the code harder to read. So you can love it or hate it, it’s up to you ;-)\nHint: May try ?runif to understand why this gives still the same result.\n\nn &lt;- 1e8\ndata &lt;- data.frame(\n  x = runif(n=n),\n  y = runif(n=n)\n  )\ndata$dist &lt;- data$x*data$x + data$y*data$y\ndata$inside &lt;- 2 - ceiling(data$dist)\nSelfmade_pi_opt2 &lt;- sum(data$inside)/length(data$inside) * 4\n\n\nselfmade_pi\n\n[1] 3.172\n\nSelfmade_pi_opt1\n\n[1] 3.141376\n\nSelfmade_pi_opt2\n\n[1] 3.141793\n\npi\n\n[1] 3.141593\n\n\nHint: Plot of new Dart-positions\n\n\n\n\n\n\n\n\n\n\nExplanation\nSince the effect of reducing the total area to a quarter is rather small, here is a clearer version. We now throw the darts only into fields where we expect a distinction. For fields in the 10x10 grid where we already know the answer, we do not throw any darts.\n\n\n\n\n\n\n\n\n\n\n\nFeasible solution\n\nn &lt;- round(1e8/21,0)\nquader &lt;-c(1,\n           1,\n           1,\n           1,\n           1,\n           9/10,\n           9/10,\n           9/10,\n           8/10,\n           8/10,\n           8/10,\n           7/10,\n           6/10,\n           6/10,\n           5/10,\n           4/10,\n           5/10,\n           4/10,\n           3/10,\n           2/10,\n           1/10)\ndata &lt;- data.frame(\n  x = runif(n=n*length(quader),min=quader-1/10,max=quader),\n  y = runif(n=n*length(quader),min=rev(quader)-1/10,max=rev(quader))\n  )\ndata$dist &lt;- data$x*data$x + data$y*data$y\ndata$inside &lt;- 2 - ceiling(data$dist)\nSelfmade_pi_opt3 &lt;- (sum(data$inside) + n * 65)/(n * 100) * 4\n\n\nselfmade_pi\n\n[1] 3.172\n\nSelfmade_pi_opt1\n\n[1] 3.141376\n\nSelfmade_pi_opt2\n\n[1] 3.141793\n\nSelfmade_pi_opt3\n\n[1] 3.141596\n\npi\n\n[1] 3.141593"
+  },
+  {
+    "objectID": "resources/textbooks.html",
+    "href": "resources/textbooks.html",
+    "title": "Annotated list of learning resources",
+    "section": "",
+    "text": "Beginners\n\nHands-on programming with R – if you know nothing about R, start here\nThe Art of R Programming\n\nBeginners with focus on data analysis (good, but not the focus of this course)\n\nR for Data Science - focused on data wrangling and visualization\nTelling Stories with Data - have not read it, but seems to be a higher level tour of tasks in data science focused on breath rather than depth\n\nAdvanced\n\nAdvanced R - excellent for developing a deeper understanding of R\nR Packages - excellent guide for developing packages for R\nThe R Inferno - absolutely fantastic; about the tricky parts of the language\n\nWorkflow\n\nWhat they forgot to teach you about R - workflow related good advice\nBuilding reproducible analytical pipelines with R - a really good guide for improving reproducibility in R and generally for best coding practices"
+  },
+  {
+    "objectID": "resources/glossary.html",
+    "href": "resources/glossary.html",
+    "title": "Glossary",
+    "section": "",
+    "text": "Term\nExplanation\n\n\n\n\nREPL\nRead-eval-print-loop - an interactive environment which takes user input, evaluates or executes it, and prints the result.\nExamples: the R console, the terminal shell, an ipython interpreter\n\n\nSSH key\n\n\n\nunit test\n\n\n\ncompiler\n\n\n\nterminal\n\n\n\nfile path\n\n\n\ncontrol flow"
+  },
+  {
+    "objectID": "slides.html",
+    "href": "slides.html",
+    "title": "Course slides",
+    "section": "",
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\nTitle\n\n\nAuthor\n\n\n\n\n\n\nFS25 “What I wish someone taught me 10 years ago”\n\n\nVen Popov\n\n\n\n\nThe Structure of a Program\n\n\nVen Popov\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "FS25 Introduction to programming and scientific computing",
+    "section": "",
+    "text": "Course materials for University of Zurich FS25 Introduction to Programming and Scientific Computing masters course"
+  },
+  {
+    "objectID": "index.html#course-description",
+    "href": "index.html#course-description",
+    "title": "FS25 Introduction to programming and scientific computing",
+    "section": "Course description",
+    "text": "Course description\nThis course provides a comprehensive introduction to programming and scientific computing tailored for master’s students in psychology. It is designed to equip students with foundational programming skills and the computational tools necessary for modern research and data analysis in both academic and industry settings.\nStudents will learn core programming concepts, including data structures, control statements, loops, custom function creation, code optimization, and debugging. The course will emphasize practical skills, such as working with a command-line terminal, implementing version control with Git and GitHub, and structuring and organizing coding projects for clarity and reproducibility. Advanced topics will include parallelization techniques and deploying code on high-performance computing clusters.\nGood coding practices, including documentation, testing, and maintaining clean, efficient code, will be a central focus, ensuring students are prepared for collaborative and reproducible research environments.\nThe skills developed in this course will lay the groundwork for more advanced courses in the program and are directly applicable to coding psychological experiments, implementing advanced analytic techniques, and developing computational models. By the end of the course, students will have the confidence and competence to apply programming to solve complex research problems and bridge the gap between computational methods and psychological inquiry."
+  },
+  {
+    "objectID": "index.html#learning-outcomes",
+    "href": "index.html#learning-outcomes",
+    "title": "FS25 Introduction to programming and scientific computing",
+    "section": "Learning outcomes",
+    "text": "Learning outcomes\n\nBe able to use git & Github for version control and sharing code\nBe able to work with a command line interface\nBe able to create reproducible software projects in R\nUnderstand absolute and relative filepaths and how to organize software projects and code\nBe able to use if/else statements, for/while statements, and write custom functions in R\nUnderstand how to store data and access data in different data structures such as vectors, lists, data.frames. matrices and so on"
+  },
+  {
+    "objectID": "slides/week3.html#recap",
+    "href": "slides/week3.html#recap",
+    "title": "The Structure of a Program",
+    "section": "Recap",
+    "text": "Recap\n\n\n\n\n\n\nWeek 1:\n\n\nWhy Programming? Course philosophy and the essence of computation\n\n\n\n\nWeek 2:\n\n\nComputational Thinking & Basic R Operations\n\n\n\n\n Short exercise: discuss core concepts for 5 minutes\n\n\n How did the pi assignment go?\n\n\nProgramming as Problem-solving\nThe Two Essential components - data and functions\nThe process of"
+  },
+  {
+    "objectID": "slides/week3.html#today",
+    "href": "slides/week3.html#today",
+    "title": "The Structure of a Program",
+    "section": "Today",
+    "text": "Today\n\n\n\n\n\n\n\n\nThe Big Picture\nWhat is a program and how do we structure it?\n\n\nThe Building Blocks\nData versus Functions\n\n\nThe Environment\nWhere do names live and who can access them?\n\n\nThe Blueprint\nCode organization & the terminal1\n\n\nThe Process\nHow do we put all this together?\n\n\nLogistics\nDiscuss feedback and overview of the rest of the course\n\n\n\n\n\nyou dipped your toes into telling a computer how to do something\na traditional course might continue with specific tools\nwe will look at the whole process of building software\nby software I mean everything - from a small script to a large application\n\n\nDid not have time for, we’ll come back to this"
+  },
+  {
+    "objectID": "slides/week3.html#today-in-a-nutshell",
+    "href": "slides/week3.html#today-in-a-nutshell",
+    "title": "The Structure of a Program",
+    "section": "Today (in a nutshell)",
+    "text": "Today (in a nutshell)\n\nAnything worth doing is worth doing well"
+  },
+  {
+    "objectID": "slides/week3.html#what-is-our-goal",
+    "href": "slides/week3.html#what-is-our-goal",
+    "title": "The Structure of a Program",
+    "section": "What is our goal?",
+    "text": "What is our goal?\n\n\nProgramming is about solving-problems\n\nanalyze data\ncreate a simulation\ncreate a tablet app for an experiment\nbuild predictive models\n\nWe solve problems by breaking them up into pieces\nSolve the pieces\nPut them together"
+  },
+  {
+    "objectID": "slides/week3.html#what-we-want-what-the-computer-wants",
+    "href": "slides/week3.html#what-we-want-what-the-computer-wants",
+    "title": "The Structure of a Program",
+    "section": "What we want != what the computer “wants”",
+    "text": "What we want != what the computer “wants”\n\nit’s all about abstraction\nwe package low-level instructions into meaningful functions\nfunctions can be named, reused, tested and documented\nok, but what is a function?"
+  },
+  {
+    "objectID": "slides/week3.html#outlook-rough-list-of-topics-to-cover",
+    "href": "slides/week3.html#outlook-rough-list-of-topics-to-cover",
+    "title": "The Structure of a Program",
+    "section": "Outlook: Rough list of topics to cover",
+    "text": "Outlook: Rough list of topics to cover\n\n\n\nbasic programming concepts\n\ndata structures\ncontrol statements - if, while, loops\nfunctions\nobjects\nscope\nalgorithms\nrandomness, seeds, distributions\ntips & tricks\nproblem-solving\n\n\n\n\nfilesystem, project organization & command line tools\nversion control & collaboration\ndependency/environment management & cluster/cloud computing\nprofiling, optimization and debugging\ntesting, documentation & reporting\n(maybe: useful math refresher)"
+  },
+  {
+    "objectID": "exercises/E003_rounding_numbers.html",
+    "href": "exercises/E003_rounding_numbers.html",
+    "title": "E003: Numbers & rounding them",
+    "section": "",
+    "text": "Below are some exercises that should help you learn the most important basic built in functions and how to incorporate them into your own functions. This sheet focuses on numbers and how they could rounded.\n\n\nas you already know, you can do simple math with R\n\nx &lt;- 4\ny &lt;- 2\nz &lt;- x * y ** 2\nz\n\n[1] 16\n\n\nBut R can do almost everything that can be done with numbers, also with vectors of numbers.\n\nx &lt;- c(4, 3)\nz &lt;- x * y ** 2\nz\n\n[1] 16 12\n\n\nAnd it becomes even easier when you wrap it in functions. So create a function that performs the calculation shown above.\n\ncalc_z(x = 2, y = 4)\n\n[1] 32\n\n\nHint: Your function should also work with vectors or with combinations\n\ncalc_z(x = c(4, 3), y = 2)\n\n[1] 16 12\n\ncalc_z(x = c(4, 3), y = c(1, 2))\n\n[1]  4 12\n\n\n\n\n\nYou used already the round function, may with such a line\n\nround(pi, 2)\n\n[1] 3.14\n\n\nR is very flexible and has interpreted this as follows:\n\nround(x = pi, digits = 2)\n\n[1] 3.14\n\n\nBut R also has many other built-in functions, such as rounding up.\n\nceiling(x = pi)\n\n[1] 4\n\n\nGuess the function which is rounding down ;-)\n\n\n[1] 3\n\n\n\n\n\nTo my knowledge, there is no built-in function that checks whether a number is even or odd.\nBut we can write one ourselves.\nHint: Try to use the integer operators for the solution.\n\n5 %% 2\n\n[1] 1\n\n5 %/% 2\n\n[1] 2\n\n\nYou should write a function is_even which returns TRUE or FALSE:\nis_even &lt;- function(x) {\n  # something goes here\n}\n\nis_even(x = 4)\n\n[1] TRUE\n\n\n\n\n\nYou will often find that you need to round something not to the nearest whole number, but to some other part of a number. For example, grades are often rounded to the nearest half - 4.5, 5, 5.5, 6… Unfortunately we cannot use round directly for this and we’ll have to be a bit more clever.\nWrite a function that will round a number to the nearest half.\nYour function should do this\n\nround_to_half(pi)\n\n[1] 3\n\nround_to_half(5.21)\n\n[1] 5\n\nround_to_half(5.42)\n\n[1] 5.5\n\nround_to_half(5.57)\n\n[1] 5.5\n\nround_to_half(5.78)\n\n[1] 6\n\n\n\n\n\nAnd just like the built-in functions, it would be nice if this also works with vectors. Check if your function works with vector input. If it doesn’t, why is that? And what can you do to make it work with vectors?\n\nraw_grades &lt;- c(3.35, 5.87, 2.24, 5.9, 4.45, 5.34)\nround_to_half(raw_grades)\n\n[1] 3.5 6.0 2.0 6.0 4.5 5.5\n\n\n\n\n\nThe built-in round function has an argument “digits”, which lets the user specify how many digits to round to. For example:\n\nround(pi, digits = 2)\n\n[1] 3.14\n\nround(pi, digits = 5)\n\n[1] 3.14159\n\n\nIt would be nice if we had a grade rounding function that also lets us specify what is the nearest proportion to which we want to round the grade. For example, if the school decides to use quarter grades (5.25), instead of writing a new function round_to_quarter, it would be nice if we had just one function that can do both things:\n\n# round to nearest half by default:\nround_to_prop(raw_grades)\n\n[1] 3.5 6.0 2.0 6.0 4.5 5.5\n\n\n\n# round to nearest quarter\nround_to_prop(raw_grades, prop = 0.25)\n\n[1] 3.25 5.75 2.25 6.00 4.50 5.25\n\n\nor to any arbitrary proportion:\n\nround_to_prop(raw_grades, prop = 1/3)\n\n[1] 3.333333 6.000000 2.333333 6.000000 4.333333 5.333333"
+  },
+  {
+    "objectID": "exercises/E003_rounding_numbers.html#basic-math-easy",
+    "href": "exercises/E003_rounding_numbers.html#basic-math-easy",
+    "title": "E003: Numbers & rounding them",
+    "section": "",
+    "text": "as you already know, you can do simple math with R\n\nx &lt;- 4\ny &lt;- 2\nz &lt;- x * y ** 2\nz\n\n[1] 16\n\n\nBut R can do almost everything that can be done with numbers, also with vectors of numbers.\n\nx &lt;- c(4, 3)\nz &lt;- x * y ** 2\nz\n\n[1] 16 12\n\n\nAnd it becomes even easier when you wrap it in functions. So create a function that performs the calculation shown above.\n\ncalc_z(x = 2, y = 4)\n\n[1] 32\n\n\nHint: Your function should also work with vectors or with combinations\n\ncalc_z(x = c(4, 3), y = 2)\n\n[1] 16 12\n\ncalc_z(x = c(4, 3), y = c(1, 2))\n\n[1]  4 12"
+  },
+  {
+    "objectID": "exercises/E003_rounding_numbers.html#round-numbers-easy",
+    "href": "exercises/E003_rounding_numbers.html#round-numbers-easy",
+    "title": "E003: Numbers & rounding them",
+    "section": "",
+    "text": "You used already the round function, may with such a line\n\nround(pi, 2)\n\n[1] 3.14\n\n\nR is very flexible and has interpreted this as follows:\n\nround(x = pi, digits = 2)\n\n[1] 3.14\n\n\nBut R also has many other built-in functions, such as rounding up.\n\nceiling(x = pi)\n\n[1] 4\n\n\nGuess the function which is rounding down ;-)\n\n\n[1] 3"
+  },
+  {
+    "objectID": "exercises/E003_rounding_numbers.html#evenodd-medium",
+    "href": "exercises/E003_rounding_numbers.html#evenodd-medium",
+    "title": "E003: Numbers & rounding them",
+    "section": "",
+    "text": "To my knowledge, there is no built-in function that checks whether a number is even or odd.\nBut we can write one ourselves.\nHint: Try to use the integer operators for the solution.\n\n5 %% 2\n\n[1] 1\n\n5 %/% 2\n\n[1] 2\n\n\nYou should write a function is_even which returns TRUE or FALSE:\nis_even &lt;- function(x) {\n  # something goes here\n}\n\nis_even(x = 4)\n\n[1] TRUE"
+  },
+  {
+    "objectID": "exercises/E003_rounding_numbers.html#round-to-nearest-first-decimal-hard",
+    "href": "exercises/E003_rounding_numbers.html#round-to-nearest-first-decimal-hard",
+    "title": "E003: Numbers & rounding them",
+    "section": "",
+    "text": "You will often find that you need to round something not to the nearest whole number, but to some other part of a number. For example, grades are often rounded to the nearest half - 4.5, 5, 5.5, 6… Unfortunately we cannot use round directly for this and we’ll have to be a bit more clever.\nWrite a function that will round a number to the nearest half.\nYour function should do this\n\nround_to_half(pi)\n\n[1] 3\n\nround_to_half(5.21)\n\n[1] 5\n\nround_to_half(5.42)\n\n[1] 5.5\n\nround_to_half(5.57)\n\n[1] 5.5\n\nround_to_half(5.78)\n\n[1] 6"
+  },
+  {
+    "objectID": "exercises/E003_rounding_numbers.html#is-your-function-vectorized-harder",
+    "href": "exercises/E003_rounding_numbers.html#is-your-function-vectorized-harder",
+    "title": "E003: Numbers & rounding them",
+    "section": "",
+    "text": "And just like the built-in functions, it would be nice if this also works with vectors. Check if your function works with vector input. If it doesn’t, why is that? And what can you do to make it work with vectors?\n\nraw_grades &lt;- c(3.35, 5.87, 2.24, 5.9, 4.45, 5.34)\nround_to_half(raw_grades)\n\n[1] 3.5 6.0 2.0 6.0 4.5 5.5"
+  },
+  {
+    "objectID": "exercises/E003_rounding_numbers.html#bonus-make-your-rounding-function-more-flexible-hardest",
+    "href": "exercises/E003_rounding_numbers.html#bonus-make-your-rounding-function-more-flexible-hardest",
+    "title": "E003: Numbers & rounding them",
+    "section": "",
+    "text": "The built-in round function has an argument “digits”, which lets the user specify how many digits to round to. For example:\n\nround(pi, digits = 2)\n\n[1] 3.14\n\nround(pi, digits = 5)\n\n[1] 3.14159\n\n\nIt would be nice if we had a grade rounding function that also lets us specify what is the nearest proportion to which we want to round the grade. For example, if the school decides to use quarter grades (5.25), instead of writing a new function round_to_quarter, it would be nice if we had just one function that can do both things:\n\n# round to nearest half by default:\nround_to_prop(raw_grades)\n\n[1] 3.5 6.0 2.0 6.0 4.5 5.5\n\n\n\n# round to nearest quarter\nround_to_prop(raw_grades, prop = 0.25)\n\n[1] 3.25 5.75 2.25 6.00 4.50 5.25\n\n\nor to any arbitrary proportion:\n\nround_to_prop(raw_grades, prop = 1/3)\n\n[1] 3.333333 6.000000 2.333333 6.000000 4.333333 5.333333"
+  },
+  {
+    "objectID": "exercises/E002_manipulating_strings.html",
+    "href": "exercises/E002_manipulating_strings.html",
+    "title": "E002: Manipulating strings",
+    "section": "",
+    "text": "Below are some exercises that should help you learn the most important basic built in functions and how to incorporate them into your own functions. This sheet focuses on letters and strings.\n\n\n\n\n\n\nNote\n\n\n\nIn the exercises below, the symbol GAP is a placeholder. You should replace it with appropriate commands to solve the problem.\n\n\n\n\nLet’s start with the obligatory ‘Hello World’.\n\ngreet &lt;- function() {\n  print(\"Hello world\")\n}\n\n\ngreet()\n\n[1] \"Hello world\"\n\n\n\n\n\nSince the first example was very impersonal, now write a function that uses your name.\ngreet_person &lt;- function(name) {\n  text &lt;- paste(GAP, name, sep = GAP)\n  print(text)\n}\nIt should output something with it.\n\ngreet_person(\"Hubi\")\n\n[1] \"Hello Hubi\"\n\n\n\n\n\nTo make it a bit more exciting, the next function should output something different depending on the time of day. You should use the if and else statements we learned in class to complete the assignment.\nHere is a helper function to determine the current hour of the day:\n\ncurrent_hour &lt;- function() {\n  # get the current time from the machine \n  current_time &lt;- Sys.time()\n\n  # extract the hour from the full time string \n  hour_string &lt;- format(current_time, \"%H\")\n\n  # convert to a number and return \n  # return() is unnecessary: functions return the value of the last expression\n  as.numeric(hour_string) \n}\n\nYou can use it like this:\n\ncurrent_hour()\n\n[1] 22\n\n\nFill out the body of the function below so that the function should print ‘Good morning’ until 12, and after that, print ‘Good afternoon’:\ngreet_time &lt;- function(name, hour = current_hour()) {\n  # put code here\n}\nBy default the function should use the current time, but to test it you can give it directly the hour as an argument:\n\ngreet_time(\"Hubi\")\n\n[1] \"Good afternoon Hubi\"\n\ngreet_time(\"Hubi\", hour = 11)\n\n[1] \"Good morning Hubi\"\n\ngreet_time(\"Hubi\", hour = 13)\n\n[1] \"Good afternoon Hubi\"\n\n\n\n\n\nIf the last exercise wasn’t fancy enough, you can extend it as follows:\nif (condition1) {\n  # something happens here if condition1 is TRUE\n} else if (condition2) {\n  # something else happens here if condition1 is FALSE but condition2 is TRUE\n} else {\n  # a final thing happens if both condition1 and condition2 are FALSE\n}\nMay something like that ;-)\n\nvery_fancy_greet(\"Hubi\", hour = 23)\n\n[1] \"Go to bed Hubi\"\n\n\n\n\n\nGoal: Write a function which reverses a string and makes all letters uppercase.\nYour function should do this\n\nrev_string(\"Hubi\")\n\n[1] \"IBUH\"\n\n\nHere are some tips. A very useful function that you might use at some point during data preparation is this:\n\nwords &lt;- strsplit(\"Hello World\", split = \" \")\n\nThe result is here a List of words\n\nwords\n\n[[1]]\n[1] \"Hello\" \"World\"\n\nwords[[1]] # vector\n\n[1] \"Hello\" \"World\"\n\n\nYou can also use this for a own function that reverses a string.\nhint: you may also use following built in functions from R\n\ntoupper(\"text\")\n\n[1] \"TEXT\"\n\nrev(c(1, 2, 3))\n\n[1] 3 2 1\n\n\nCombine the functions above in order to complete assignment.\n\n\n\nIf you’ve mastered the last exercise, it’s just a small step to write a function that checks if a word is a palindrome.\nYour function should give out TRUE if the word is a palindrome.\nHint: You can use your function “rev_string” inside the new function\n\nis_palindrome(\"Hubi\")\n\n[1] FALSE\n\nis_palindrome(\"Anna\")\n\n[1] TRUE"
+  },
+  {
+    "objectID": "exercises/E002_manipulating_strings.html#hello-world",
+    "href": "exercises/E002_manipulating_strings.html#hello-world",
+    "title": "E002: Manipulating strings",
+    "section": "",
+    "text": "Let’s start with the obligatory ‘Hello World’.\n\ngreet &lt;- function() {\n  print(\"Hello world\")\n}\n\n\ngreet()\n\n[1] \"Hello world\""
+  },
+  {
+    "objectID": "exercises/E002_manipulating_strings.html#personal-greetings-easy",
+    "href": "exercises/E002_manipulating_strings.html#personal-greetings-easy",
+    "title": "E002: Manipulating strings",
+    "section": "",
+    "text": "Since the first example was very impersonal, now write a function that uses your name.\ngreet_person &lt;- function(name) {\n  text &lt;- paste(GAP, name, sep = GAP)\n  print(text)\n}\nIt should output something with it.\n\ngreet_person(\"Hubi\")\n\n[1] \"Hello Hubi\""
+  },
+  {
+    "objectID": "exercises/E002_manipulating_strings.html#fancy-greetings-medium",
+    "href": "exercises/E002_manipulating_strings.html#fancy-greetings-medium",
+    "title": "E002: Manipulating strings",
+    "section": "",
+    "text": "To make it a bit more exciting, the next function should output something different depending on the time of day. You should use the if and else statements we learned in class to complete the assignment.\nHere is a helper function to determine the current hour of the day:\n\ncurrent_hour &lt;- function() {\n  # get the current time from the machine \n  current_time &lt;- Sys.time()\n\n  # extract the hour from the full time string \n  hour_string &lt;- format(current_time, \"%H\")\n\n  # convert to a number and return \n  # return() is unnecessary: functions return the value of the last expression\n  as.numeric(hour_string) \n}\n\nYou can use it like this:\n\ncurrent_hour()\n\n[1] 22\n\n\nFill out the body of the function below so that the function should print ‘Good morning’ until 12, and after that, print ‘Good afternoon’:\ngreet_time &lt;- function(name, hour = current_hour()) {\n  # put code here\n}\nBy default the function should use the current time, but to test it you can give it directly the hour as an argument:\n\ngreet_time(\"Hubi\")\n\n[1] \"Good afternoon Hubi\"\n\ngreet_time(\"Hubi\", hour = 11)\n\n[1] \"Good morning Hubi\"\n\ngreet_time(\"Hubi\", hour = 13)\n\n[1] \"Good afternoon Hubi\""
+  },
+  {
+    "objectID": "exercises/E002_manipulating_strings.html#very-fancy-greetings-hard",
+    "href": "exercises/E002_manipulating_strings.html#very-fancy-greetings-hard",
+    "title": "E002: Manipulating strings",
+    "section": "",
+    "text": "If the last exercise wasn’t fancy enough, you can extend it as follows:\nif (condition1) {\n  # something happens here if condition1 is TRUE\n} else if (condition2) {\n  # something else happens here if condition1 is FALSE but condition2 is TRUE\n} else {\n  # a final thing happens if both condition1 and condition2 are FALSE\n}\nMay something like that ;-)\n\nvery_fancy_greet(\"Hubi\", hour = 23)\n\n[1] \"Go to bed Hubi\""
+  },
+  {
+    "objectID": "exercises/E002_manipulating_strings.html#reverse-strings-hard",
+    "href": "exercises/E002_manipulating_strings.html#reverse-strings-hard",
+    "title": "E002: Manipulating strings",
+    "section": "",
+    "text": "Goal: Write a function which reverses a string and makes all letters uppercase.\nYour function should do this\n\nrev_string(\"Hubi\")\n\n[1] \"IBUH\"\n\n\nHere are some tips. A very useful function that you might use at some point during data preparation is this:\n\nwords &lt;- strsplit(\"Hello World\", split = \" \")\n\nThe result is here a List of words\n\nwords\n\n[[1]]\n[1] \"Hello\" \"World\"\n\nwords[[1]] # vector\n\n[1] \"Hello\" \"World\"\n\n\nYou can also use this for a own function that reverses a string.\nhint: you may also use following built in functions from R\n\ntoupper(\"text\")\n\n[1] \"TEXT\"\n\nrev(c(1, 2, 3))\n\n[1] 3 2 1\n\n\nCombine the functions above in order to complete assignment."
+  },
+  {
+    "objectID": "exercises/E002_manipulating_strings.html#palindrome-combined",
+    "href": "exercises/E002_manipulating_strings.html#palindrome-combined",
+    "title": "E002: Manipulating strings",
+    "section": "",
+    "text": "If you’ve mastered the last exercise, it’s just a small step to write a function that checks if a word is a palindrome.\nYour function should give out TRUE if the word is a palindrome.\nHint: You can use your function “rev_string” inside the new function\n\nis_palindrome(\"Hubi\")\n\n[1] FALSE\n\nis_palindrome(\"Anna\")\n\n[1] TRUE"
+  },
+  {
+    "objectID": "exercises/E001_calculating_pi.html",
+    "href": "exercises/E001_calculating_pi.html",
+    "title": "E001: Calculating PI",
+    "section": "",
+    "text": "In contrast to the simple method described below, the first exercise should calculates our own PI.\n\npi\n\n[1] 3.141593\n\n\nThe following is a step-by-step guide to putting the first programming skills from the lesson into practice."
+  },
+  {
+    "objectID": "exercises/E001_calculating_pi.html#programming-exercise",
+    "href": "exercises/E001_calculating_pi.html#programming-exercise",
+    "title": "E001: Calculating PI",
+    "section": "",
+    "text": "In contrast to the simple method described below, the first exercise should calculates our own PI.\n\npi\n\n[1] 3.141593\n\n\nThe following is a step-by-step guide to putting the first programming skills from the lesson into practice."
+  },
+  {
+    "objectID": "exercises/E001_calculating_pi.html#basic-idea",
+    "href": "exercises/E001_calculating_pi.html#basic-idea",
+    "title": "E001: Calculating PI",
+    "section": "Basic idea",
+    "text": "Basic idea\nAs Ven showed in the first lesson…\n… if we throw thousands of random placed darts into a square field, the number of darts that fall into the enclosed circle should represent the area of that circle in relation to the area of the square.\nIn the following we will try to confirm this with our own programming skills.\n\n1. Step\nGeneration of a random position for a single dart within a square. The square extends from -1 to +1 in the X-direction, as well as in the Y-direction.\nUse a random number generator for a uniform distribution and save the result in the two variables x and y (GAP are placeholder)\n\nx &lt;- runif(n=GAP,min=GAP,max=GAP)\ny &lt;- GAP\n\n\n\n2. Step\nNow calculate the distance from this position to the center. You can use the following simplified formula for our chosen square\n\ndist &lt;- x**2 + y**2\nprint(dist)\n\n[1] 0.8710378\n\n\n\n\n3. Step\nCreate a decision rule and print “inside” if the point is inside the circle or “outside” if it is not.\n\nif (dist &lt;= GAP){\n  GAP\n} else {\n  GAP\n}\n\n\n\n4. Step\nCreate now a loop (use for or while statement) and execute the code from steps 1 to 3 within it. You should get something like that now\nHint: Use may 10 iteration for the beginning\n\n\n[1] \"outside\"\n[1] \"inside\"\n[1] \"inside\"\n[1] \"inside\"\n[1] \"outside\"\n[1] \"inside\"\n[1] \"outside\"\n[1] \"outside\"\n[1] \"inside\"\n[1] \"inside\"\n\n\n\n\n5. Step\nCopy now the code from Step 4 and modify it in a way that instead of outputting a result for each point, it sums up the number of “insides”.\nUse something like that,\n\nn_insides &lt;- 0\nn_insides &lt;- n_insides + 1\nprint(n_insides)\n\n[1] 1\n\n\nor more elegant write the results in a vector.\n\nv_insides &lt;- rep(x=0,10)\nv_insides[2] &lt;- 1\nprint(v_insides)\n\n [1] 0 1 0 0 0 0 0 0 0 0\n\n\nIf you use 1000 iteration you should became such a number\n\n\n[1] 794"
+  },
+  {
+    "objectID": "exercises/E001_calculating_pi.html#final-step",
+    "href": "exercises/E001_calculating_pi.html#final-step",
+    "title": "E001: Calculating PI",
+    "section": "Final Step",
+    "text": "Final Step\nAs the final step, you now need to calculate PI from your result and compare it with the real one ;-)\n\nprint(selfmade_pi)\n\n[1] 3.176\n\nif (selfmade_pi == pi){\n  print(\"YOU ARE UNBELIEFABLE\")\n} else {\n  print(\"Try more iterations !!! (or try the function round)\")\n}\n\n[1] \"Try more iterations !!! (or try the function round)\""
+  }
+]

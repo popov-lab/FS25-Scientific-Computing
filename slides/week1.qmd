@@ -1,0 +1,175 @@
+---
+title: FS25 “What I wish someone taught me 10 years ago”
+author: Ven Popov
+format: 
+  revealjs:
+    theme: dark
+    css: style.css
+    footer: "FS25 Scientific Computing &nbsp; | &nbsp; Week 1"
+    slide-number: true
+    fig-responsive: true
+resources:
+  - assets
+---
+
+# Introduction to programming and scientific computing {style="text-align: center;"}
+
+::: {.notes}
+- begin with joke about the title
+- leads into discussion concerning the class philosophy
+:::
+
+# What is *computation*? Why care about it? {style="text-align: center;"}
+
+## Fundamentals of programming for scientific computing {.smaller}
+
+- scientists are not programmers and have their own training requirements
+- typically haphazard training in the social sciences, statistics and related fields
+- online tutorials focus on specific technologies and languages
+- need for training of core concepts, practices and skills
+- not a computer science degree, not an in-depth math education, nor a mastery of a particular language
+- a mixture of all, focused on doing with understanding
+- exposure to most important concepts, even advanced ones
+- a blueprint so that you now what you need to know long-term
+
+## {.smaller}
+
+### Doing with understanding
+
+- courses focused entirely on practice risk missing the big picture and transferable skills
+- courses focused entirely on theory risk disconnectedness 
+- build a robust mental model of computation and software engineering
+
+### Why R?
+
+- a.k.a. why not Python, JavaScript, Julia, C or whatever
+- practicality
+- focus is on transferable concept and skills
+
+### Early wins
+
+- get to make/do something exciting right away
+- incrementally work towards a final project
+- optional paths
+
+# Brief introductions
+
+- Name?
+- Why are you taking this class?
+- What previous programming / mathematical experience do you have?
+
+## What is computation? Some background {.smaller}
+
+<!-- TODO: next year break up this slide and add some images -->
+
+::: {.notes}
+- ask students to speak out ideas - what they understand?
+:::
+
+::: incremental
+
+- Computation vs programming
+- First computer
+  - A lock 
+  - Humans
+- Turing machines
+  - Turing complete
+  - Game of life
+- Low-level languages
+  - Machine code
+  - Punch cards
+  - Assembly language
+- High-level languages
+  - Compiling vs interpreting
+
+:::
+
+## Abstractions
+
+- expressing intent vs implementation 
+- data structures
+- algorithms
+- core concepts
+  - variables
+  - functions
+  - scope
+
+## Class structure {.smaller}
+
+```{r}
+#| echo: true
+#| output-location: column-fragment
+for (week in 1:14) {
+
+  if (week %% 2 == 1) {
+    type = "Lecture"
+  } else {
+    type = "Practice"
+  }
+
+  cat("Week ", week, ": ", type, "\n", sep = "")
+}
+```
+
+::: {.notes}
+- this is actual code embeded in the slide that produced the result (not copy paste from a separate program)
+- during some of these weeks you will also learn why this is not great code
+:::
+
+## Outlook: Rough list of topics to cover {.smaller}
+
+<!-- I actually added this only later in week 3, but next year I should have the syllabus ready -->
+
+:::: {.columns}
+
+::: {.column}
+
+- basic programming concepts
+   - data structures
+   - control statements - if, while, loops
+   - functions
+   - objects
+   - scope
+   - algorithms
+   - randomness, seeds, distributions
+   - tips & tricks
+   - problem-solving
+:::
+
+::: {.column}
+
+- filesystem, project organization & command line tools
+- version control & collaboration
+- dependency/environment management & cluster/cloud computing
+- profiling, optimization and debugging
+- testing, documentation & reporting
+- (maybe: useful math refresher)
+
+:::
+::::
+
+## Learning resources {.smaller}
+
+- Beginners
+   - [Hands-on programming with R](https://rstudio-education.github.io/hopr/) – if you know nothing about R, start here
+   - [The Art of R Programming](https://diytranscriptomics.com/Reading/files/The%20Art%20of%20R%20Programming.pdf)
+
+- Beginners with focus on data analysis (good, but not the focus of this course)
+
+   - [R for Data Science](https://r4ds.hadley.nz/) - focused on data wrangling and visualization
+   - [Telling Stories with Data](https://tellingstorieswithdata.com/) - have not read it, but seems to be a higher level tour of tasks in data science focused on breath rather than depth
+
+## Learning resources {.smaller}
+
+- Advanced
+
+   - [Advanced R](https://adv-r.hadley.nz/) - excellent for developing a deeper understanding of R
+   - [R Packages](https://r-pkgs.org/) - excellent guide for developing packages for R
+   - [The R Inferno ](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf) - absolutely fantastic; about the tricky parts of the language
+
+- Workflow
+
+   - [What they forgot to teach you about R](https://rstats.wtf/) - workflow related good advice
+   - [Building reproducible analytical pipelines with R](https://raps-with-r.dev/) - a really good guide for improving reproducibility in R and generally for best coding practices
+
+<!-- TODO: next year add some more general books on computing -->

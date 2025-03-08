@@ -1,0 +1,34 @@
+project:
+  type: website
+  output-dir: docs
+  resources: resources/cheatsheets/*
+
+website:
+  title: "FS25: Scientific Computing"
+  search: true
+  page-navigation: true
+  navbar:
+    left:
+      - href: index.qmd
+        text: About
+      - href: slides.qmd
+        text: Slides
+      - href: exercises.qmd
+        text: Exercises
+      - href: solutions.qmd
+        text: Solutions
+      - text: Additional resources
+        menu:
+          - href: resources/cheatsheets/
+            text: "R & Math cheatsheets"
+          - href: resources/textbooks.qmd
+            text: "Textbooks and learning resources"
+          - href: resources/glossary.qmd
+            text: Glossary
+
+format: 
+  html: 
+    toc: true
+
+execute: 
+  freeze: true

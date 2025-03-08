@@ -1,0 +1,20 @@
+---
+title: Annotated list of learning resources
+---
+
+- Beginners
+   - [Hands-on programming with R](https://rstudio-education.github.io/hopr/) – if you know nothing about R, start here
+   - [The Art of R Programming](https://diytranscriptomics.com/Reading/files/The%20Art%20of%20R%20Programming.pdf)
+
+- Beginners with focus on data analysis (good, but not the focus of this course)
+   - [R for Data Science](https://r4ds.hadley.nz/) - focused on data wrangling and visualization
+   - [Telling Stories with Data](https://tellingstorieswithdata.com/) - have not read it, but seems to be a higher level tour of tasks in data science focused on breath rather than depth
+
+- Advanced
+   - [Advanced R](https://adv-r.hadley.nz/) - excellent for developing a deeper understanding of R
+   - [R Packages](https://r-pkgs.org/) - excellent guide for developing packages for R
+   - [The R Inferno ](https://www.burns-stat.com/pages/Tutor/R_inferno.pdf) - absolutely fantastic; about the tricky parts of the language
+
+- Workflow
+   - [What they forgot to teach you about R](https://rstats.wtf/) - workflow related good advice
+   - [Building reproducible analytical pipelines with R](https://raps-with-r.dev/) - a really good guide for improving reproducibility in R and generally for best coding practices

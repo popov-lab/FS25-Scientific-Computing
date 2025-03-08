@@ -1,12 +1,7 @@
 ---
-title: "Kurves & Plots"
+title: "Curves & Plots"
 author: "Hubert Baechli"
 date: "`r Sys.Date()`"
-output: pdf_document
-header-includes:
-  - \usepackage{xcolor}
-  - \usepackage{titlesec}
-  - \titleformat{\subsubsection}[block]{\normalfont\normalsize\bfseries\color{green}}{}{0em}{}
 ---
 
 ```{r setup, include=FALSE}
@@ -14,15 +9,20 @@ knitr::opts_chunk$set(echo = TRUE)
 GAP <- 1
 ```
 
+::: {.callout-warning}
+This set of exercises is not fully ready and will be improved over the next few days. Do at your own risk ;)
+:::
+
 # Programming exercise
 
-This sheet contains an exercise where you can apply and deepen the skills from E002 to E004
+This sheet contains an exercise where you can apply and deepen the skills from E002 to E004. The end goal is to be able to plot different Sine curves that differ in amplitude, frequency and offset.
 
-## 1. Calculating a Sine curve (E003)
+
+## 1. Calculating a Sine wave (E003)
 
 To begin, we need a function that calculates the sine.
 
-*Hint: implement at least this parameters, if you like you can also add offsets.*
+*Hint: implement at least these parameters, if you like you can also add offsets.*
 
 ```{r}
 x <- pi
@@ -57,8 +57,6 @@ y <- calc_sin(x = x, amp = 2, freq = 0.5)
 y
 ```
 
-\newpage
-
 ## 2. Ploting a curve (combined)
 
 Since the previous result is not easy to verify, let's create a plot of these results.
@@ -77,8 +75,6 @@ plot_sin <- function(x, GAP){
   return(plot(x, y, GAP))
 }
 ```
-
-\newpage
 
 ***You should got a function which does something like that***
 
@@ -120,8 +116,6 @@ x <- seq(from = 0, to = 4*pi, by = pi/25)
 plot_sin(x = x, amp = 2, freq = 1, color = "green")
 ```
 
-\newpage
-
 ## 3. Add a reverence curve (Outlook)
 
 Once the basic building blocks are in place, it becomes easier to add further enhancements. Here, for example, is a reference curve added.
@@ -154,8 +148,6 @@ plot_sin_rev <- function(x,
 ```{r}
 plot_sin_rev(x = x, amp = 2, freq = 2, color = "green")
 ```
-
-\newpage
 
 ```{r}
 plot_sin_rev(x = x, amp = 2, freq = 1, yoffset =1, color = "green")

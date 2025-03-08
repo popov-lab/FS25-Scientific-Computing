@@ -27,7 +27,8 @@ website:
             text: Glossary
 
 format: 
-  html: default
+  html: 
+    toc: true
 
 execute: 
   freeze: true

@@ -36,7 +36,7 @@ y
 ***Your function now should do this***
 
 ```{r echo = FALSE}
-calc_sin <- function(x, amp, freq, xoffset = 0, yoffset = 0){
+calc_sin <- function(x, amp, freq, xoffset = 0, yoffset = 0) {
   y <- amp * sin(freq * x + xoffset) + yoffset
   return(y)
 }
@@ -52,7 +52,7 @@ calc_sin(x = pi, amp = 2, freq = 0.5)
 *Hint: sequences you learned in E004*
 
 ```{r}
-x <- seq(from = 0, to = 4*pi, by = pi/4)
+x <- seq(from = 0, to = 4 * pi, by = pi / 4)
 y <- calc_sin(x = x, amp = 2, freq = 0.5)
 y
 ```
@@ -62,14 +62,16 @@ y
 Since the previous result is not easy to verify, let's create a plot of these results.
 
 ```{r}
-plot(x, y, type = "l", col = "blue", lwd = 2, 
-     xlab = "x", ylab = "y", main = "Sine curve")
+plot(x, y,
+  type = "l", col = "blue", lwd = 2,
+  xlab = "x", ylab = "y", main = "Sine curve"
+)
 ```
 
 You are already familiar with functions that return text or numbers. In R, however, it is also possible to write functions that generates directly plots.
 
 ```{r}
-plot_sin <- function(x, GAP){
+plot_sin <- function(x, GAP) {
   y <- GAP # calc_sin
   title <- GAP
   return(plot(x, y, GAP))
@@ -81,38 +83,43 @@ plot_sin <- function(x, GAP){
 *Hint: Use "E002"-skills for customizing your title*
 
 ```{r, echo=FALSE}
-plot_sin <- function(x, 
-                     amp, 
-                     freq, 
-                     xoffset = 0, 
-                     yoffset = 0, 
-                     color = "black"){
-  y <- calc_sin(x = x, 
-                amp = amp, 
-                freq = freq, 
-                xoffset = xoffset, 
-                yoffset = yoffset)
-  
-  title <- paste("Sine curve (amplitude of", 
-                 amp, 
-                 "and frequency of", 
-                 freq, 
-                 ") in", 
-                 color)
-  
-  return(plot(x, 
-              y, 
-              type = "l", 
-              col = color, 
-              lwd = 2, 
-              xlab = "x", 
-              ylab = "y", 
-              main = title))
+plot_sin <- function(x,
+                     amp,
+                     freq,
+                     xoffset = 0,
+                     yoffset = 0,
+                     color = "black") {
+  y <- calc_sin(
+    x = x,
+    amp = amp,
+    freq = freq,
+    xoffset = xoffset,
+    yoffset = yoffset
+  )
+
+  title <- paste(
+    "Sine curve (amplitude of",
+    amp,
+    "and frequency of",
+    freq,
+    ") in",
+    color
+  )
+
+  return(plot(x,
+    y,
+    type = "l",
+    col = color,
+    lwd = 2,
+    xlab = "x",
+    ylab = "y",
+    main = title
+  ))
 }
 ```
 
 ```{r}
-x <- seq(from = 0, to = 4*pi, by = pi/25)
+x <- seq(from = 0, to = 4 * pi, by = pi / 25)
 plot_sin(x = x, amp = 2, freq = 1, color = "green")
 ```
 
@@ -121,26 +128,29 @@ plot_sin(x = x, amp = 2, freq = 1, color = "green")
 Once the basic building blocks are in place, it becomes easier to add further enhancements. Here, for example, is a reference curve added.
 
 ```{r, echo=FALSE}
-plot_sin_rev <- function(x, 
-                     amp, 
-                     freq, 
-                     xoffset = 0, 
-                     yoffset = 0, 
-                     color = "black"){
-  
-  y_rev <- calc_sin(x = x, 
-                    amp = 1, 
-                    freq = 1, 
-                    xoffset = 0, 
-                    yoffset = 0)
-  
-  plt <- plot_sin(x = x, 
-                  amp = amp, 
-                  freq = freq, 
-                  xoffset = xoffset, 
-                  yoffset = yoffset, 
-                  color = color)
-  
+plot_sin_rev <- function(x,
+                         amp,
+                         freq,
+                         xoffset = 0,
+                         yoffset = 0,
+                         color = "black") {
+  y_rev <- calc_sin(
+    x = x,
+    amp = 1,
+    freq = 1,
+    xoffset = 0,
+    yoffset = 0
+  )
+
+  plt <- plot_sin(
+    x = x,
+    amp = amp,
+    freq = freq,
+    xoffset = xoffset,
+    yoffset = yoffset,
+    color = color
+  )
+
   plt <- plt + lines(x, y_rev, col = "black", lwd = 2, lty = 2)
 }
 ```
@@ -150,5 +160,5 @@ plot_sin_rev(x = x, amp = 2, freq = 2, color = "green")
 ```
 
 ```{r}
-plot_sin_rev(x = x, amp = 2, freq = 1, yoffset =1, color = "green")
+plot_sin_rev(x = x, amp = 2, freq = 1, yoffset = 1, color = "green")
 ```

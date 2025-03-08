@@ -2,11 +2,6 @@
 title: "Numbers & rounding them"
 author: "Hubert Baechli"
 date: "`r Sys.Date()`"
-output: pdf_document
-header-includes:
-  - \usepackage{xcolor}
-  - \usepackage{titlesec}
-  - \titleformat{\subsubsection}[block]{\normalfont\normalsize\bfseries\color{green}}{}{0em}{}
 ---
 
 ```{r setup, include=FALSE}
@@ -20,7 +15,7 @@ Echo <- FALSE
 
 # Programming exercise
 
-Below are some exercises that should help you learn the most important basic built in functions and how to incorporate them into your own functions. This sheet focuses on numbers and how the could rounded.
+Below are some exercises that should help you learn the most important basic built in functions and how to incorporate them into your own functions. This sheet focuses on numbers and how they could rounded.
 
 ## 1. Basic math (easy)
 
@@ -45,8 +40,7 @@ z
 
 ```{r, echo = FALSE}
 calc_z <- function(x, y) {
-  z <-  x * y ** 2
-  return(z)
+   x * y ** 2
 }
 ```
 
@@ -57,8 +51,8 @@ calc_z(x = 2, y = 4)
 *Hint: Your function should also work with vectors or with combinations*
 
 ```{r}
-calc_z(x = c(4,3), y = 2)
-calc_z(x = c(4,3), y = c(1,2))
+calc_z(x = c(4, 3), y = 2)
+calc_z(x = c(4, 3), y = c(1, 2))
 ```
 
 ## 2. Round numbers (easy)
@@ -66,7 +60,7 @@ calc_z(x = c(4,3), y = c(1,2))
 You used already the round function, may with such a line
 
 ```{r}
-round(pi,2)
+round(pi, 2)
 ```
 
 R is very flexible and has interpreted this as follows:
@@ -81,7 +75,7 @@ But R also has many other built-in functions, such as rounding up.
 ceiling(x = pi)
 ```
 
-***Guess the function which's rounding down ;-)***
+***Guess the function which is rounding down ;-)***
 
 ```{r, echo = FALSE}
 floor(x = pi)
@@ -101,9 +95,16 @@ To my knowledge, there is no built-in function that checks whether a number is e
 ```
 
 ```{r, echo = FALSE}
-is_even <- function(x){
-  res <- (x %% 2 == 0)
-  return(res)
+is_even <- function(x) {
+   x %% 2 == 0
+}
+```
+
+You should write a function `is_even` which returns TRUE or FALSE:
+
+```r
+is_even <- function(x) {
+  # something goes here
 }
 ```
 
@@ -111,54 +112,68 @@ is_even <- function(x){
 is_even(x = 4)
 ```
 
-## 3. Round even (hard)
+## 3. Round to nearest first decimal (hard)
 
-It is probably more interesting to have a function that rounds a number to the nearest even number.
+You will often find that you need to round something not to the nearest whole number, but to some other part of a number. For example, grades are often rounded to the nearest half - 4.5, 5, 5.5, 6... Unfortunately we cannot use `round` directly for this and we'll have to be a bit more clever.
+
+Write a function that will round a number to the nearest half.
 
 ***Your function should do this***
 
 ```{r, echo = FALSE}
-round_even <- function(x){
-  res <- x %/% 2
-  if (x %% 2 >= 1){
-    res <- res + 1
-    }
-  res <- res * 2
-  return(res)
+round_to_half <- function(x) {
+  round(x * 2) / 2
 }
 ```
 
 ```{r}
-round_even(x = 2*pi)
+round_to_half(pi)
+round_to_half(5.21)
+round_to_half(5.42)
+round_to_half(5.57)
+round_to_half(5.78)
 ```
 
-## 4. Round even for vectors (combined)
+## 4. Is your function vectorized? (harder)
 
-And just like the built-in functions, it would be nice if this also works with vectors. ***But mine is not doing that :-(***
+And just like the built-in functions, it would be nice if this also works with vectors. Check if your function works with vector input. If it doesn't, why is that? And what can you do to make it work with vectors?
 
-***If yours is not working either, write an additional function that can handle it.***
+```{r}
+raw_grades <- c(3.35, 5.87, 2.24, 5.9, 4.45, 5.34)
+round_to_half(raw_grades)
+```
 
-*Hint: You may use a loop where you can let your first function run in it.*
+## 5. Bonus: make your rounding function more flexible (hardest)
 
-```{r, echo = FALSE}
-vec_round_even <- function(x){
-  vec <- c() 
-  for (i in seq_along(x)) {
-    vec[i] <- round_even(x[i])
-  }
-  return(vec)
+The built-in `round` function has an argument "digits", which lets the user specify how many digits to round to. For example:
+
+```{r}
+round(pi, digits = 2)
+round(pi, digits = 5)
+```
+
+It would be nice if we had a grade rounding function that also lets us specify what is the nearest proportion to which we want to round the grade. For example, if the school decides to use quarter grades (5.25), instead of writing a new function `round_to_quarter`, it would be nice if we had just one function that can do both things:
+
+```{r}
+#| echo: false
+round_to_prop <- function(x, prop = 0.5) {
+  round(x / prop) * prop
 }
+```
 
+
+```{r}
+# round to nearest half by default:
+round_to_prop(raw_grades)
 ```
 
 ```{r}
-vec_round_even(x= c(pi,2*pi,10*pi))
+# round to nearest quarter
+round_to_prop(raw_grades, prop = 0.25)
 ```
 
-```{r, echo = FALSE}
-round_even <- function(x){
-  res <- x %/% 2 + floor(x %% 2)
-  res <- res * 2
-  return(res)
-}
+or to any arbitrary proportion:
+
+```{r}
+round_to_prop(raw_grades, prop = 1/3)
 ```

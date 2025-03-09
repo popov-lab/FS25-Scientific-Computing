@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Hubert Baechli">
-<meta name="dcterms.date" content="2025-03-08">
+<meta name="dcterms.date" content="2025-03-01">
 
 <title>calculating PI – FS25: Scientific Computing</title>
 <style>
@@ -239,7 +239,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">March 8, 2025</p>
+      <p class="date">March 1, 2025</p>
     </div>
   </div>
   
@@ -272,14 +272,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Generation of a random position for a single dart within a square. The square extends from -1 to +1 in the X-direction, as well as in the Y-direction.<br>
 Use a random number generator for a uniform distribution and save the result in the two variables x and y (GAP are placeholder)</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span>GAP,<span class="at">min=</span>GAP,<span class="at">max=</span>GAP)</span>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> GAP, <span class="at">min =</span> GAP, <span class="at">max =</span> GAP)</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> GAP</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="feasible-solution" class="level3">
 <h3 class="anchored" data-anchor-id="feasible-solution">Feasible solution</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span><span class="dv">1</span>,<span class="at">min=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">max=</span><span class="dv">1</span>)</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span><span class="dv">1</span>,<span class="at">min=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">max=</span><span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 </section>
@@ -290,7 +290,7 @@ Use a random number generator for a uniform distribution and save the result in 
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>dist <span class="ot">&lt;-</span> x<span class="sc">**</span><span class="dv">2</span> <span class="sc">+</span> y<span class="sc">**</span><span class="dv">2</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.7474635</code></pre>
+<pre><code>[1] 0.780845</code></pre>
 </div>
 </div>
 </section>
@@ -298,7 +298,7 @@ Use a random number generator for a uniform distribution and save the result in 
 <h2 class="anchored" data-anchor-id="step-2">3. Step</h2>
 <p>Create a decision rule and print “inside” if the point is inside the circle or “outside” if it is not.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (dist <span class="sc">&lt;=</span> GAP){</span>
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (dist <span class="sc">&lt;=</span> GAP) {</span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  GAP</span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  GAP</span>
@@ -307,9 +307,9 @@ Use a random number generator for a uniform distribution and save the result in 
 <section id="feasible-solution-1" class="level3">
 <h3 class="anchored" data-anchor-id="feasible-solution-1">Feasible solution</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (dist <span class="sc">&lt;=</span> <span class="dv">1</span>){</span>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (dist <span class="sc">&lt;=</span> <span class="dv">1</span>) {</span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"inside"</span>)</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"outside"</span>)</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -326,12 +326,12 @@ Use a random number generator for a uniform distribution and save the result in 
 <h3 class="anchored" data-anchor-id="feasible-solution-2">Feasible solution</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>) {</span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span><span class="dv">1</span>,<span class="at">min=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">max=</span><span class="dv">1</span>)</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span><span class="dv">1</span>,<span class="at">min=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">max=</span><span class="dv">1</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>  dist <span class="ot">&lt;-</span> x<span class="sc">**</span><span class="dv">2</span> <span class="sc">+</span> y<span class="sc">**</span><span class="dv">2</span></span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (dist <span class="sc">&lt;=</span> <span class="dv">1</span>){</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (dist <span class="sc">&lt;=</span> <span class="dv">1</span>) {</span>
 <span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"inside"</span>)</span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>    } <span class="cf">else</span> {</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"outside"</span>)</span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -341,7 +341,7 @@ Use a random number generator for a uniform distribution and save the result in 
 [1] "inside"
 [1] "outside"
 [1] "inside"
-[1] "inside"
+[1] "outside"
 [1] "inside"
 [1] "inside"
 [1] "inside"
@@ -364,7 +364,7 @@ Use a random number generator for a uniform distribution and save the result in 
 </div>
 <p>or more elegant write the results in a vector.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>v_insides <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="at">x=</span><span class="dv">0</span>,<span class="dv">10</span>)</span>
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>v_insides <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="at">x =</span> <span class="dv">0</span>, <span class="dv">10</span>)</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>v_insides[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(v_insides)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -374,19 +374,19 @@ Use a random number generator for a uniform distribution and save the result in 
 <p>If you use 1000 iteration you should became such a number</p>
 <div class="cell">
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 804</code></pre>
+<pre><code>[1] 780</code></pre>
 </div>
 </div>
 <section id="feasible-solution-3" class="level3">
 <h3 class="anchored" data-anchor-id="feasible-solution-3">Feasible solution</h3>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>v_insides <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="at">x=</span><span class="dv">0</span>,n)</span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>v_insides <span class="ot">&lt;-</span> <span class="fu">rep</span>(<span class="at">x =</span> <span class="dv">0</span>, n)</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>n) {</span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span><span class="dv">1</span>,<span class="at">min=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">max=</span><span class="dv">1</span>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n=</span><span class="dv">1</span>,<span class="at">min=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">max=</span><span class="dv">1</span>)</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="at">n =</span> <span class="dv">1</span>, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
 <span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a>  dist <span class="ot">&lt;-</span> x<span class="sc">**</span><span class="dv">2</span> <span class="sc">+</span> y<span class="sc">**</span><span class="dv">2</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (dist <span class="sc">&lt;=</span> <span class="dv">1</span>){</span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (dist <span class="sc">&lt;=</span> <span class="dv">1</span>) {</span>
 <span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a>    v_insides[i] <span class="ot">&lt;-</span> <span class="dv">1</span></span>
 <span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a>  }</span>
 <span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -400,14 +400,14 @@ Use a random number generator for a uniform distribution and save the result in 
 <section id="feasible-solution-4" class="level3">
 <h3 class="anchored" data-anchor-id="feasible-solution-4">Feasible solution</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>selfmade_pi <span class="ot">&lt;-</span> <span class="fu">sum</span>(v_insides)<span class="sc">/</span><span class="fu">length</span>(v_insides)<span class="sc">*</span><span class="dv">4</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>selfmade_pi <span class="ot">&lt;-</span> <span class="fu">sum</span>(v_insides) <span class="sc">/</span> <span class="fu">length</span>(v_insides) <span class="sc">*</span> <span class="dv">4</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(selfmade_pi)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.172</code></pre>
+<pre><code>[1] 3.096</code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (selfmade_pi <span class="sc">==</span> pi){</span>
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (selfmade_pi <span class="sc">==</span> pi) {</span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"YOU ARE UNBELIEFABLE"</span>)</span>
 <span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>} <span class="cf">else</span> {</span>
 <span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="st">"Try more iterations !!! (or try the function round)"</span>)</span>
@@ -431,33 +431,33 @@ Use a random number generator for a uniform distribution and save the result in 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e8</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(<span class="at">n=</span>n,<span class="at">min=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">max=</span><span class="dv">1</span>),</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">runif</span>(<span class="at">n=</span>n,<span class="at">min=</span><span class="sc">-</span><span class="dv">1</span>,<span class="at">max=</span><span class="dv">1</span>)</span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dist <span class="ot">&lt;-</span> data<span class="sc">$</span>x<span class="sc">*</span>data<span class="sc">$</span>x <span class="sc">+</span> data<span class="sc">$</span>y<span class="sc">*</span>data<span class="sc">$</span>y</span>
+<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(<span class="at">n =</span> n, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>),</span>
+<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">runif</span>(<span class="at">n =</span> n, <span class="at">min =</span> <span class="sc">-</span><span class="dv">1</span>, <span class="at">max =</span> <span class="dv">1</span>)</span>
+<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dist <span class="ot">&lt;-</span> data<span class="sc">$</span>x <span class="sc">*</span> data<span class="sc">$</span>x <span class="sc">+</span> data<span class="sc">$</span>y <span class="sc">*</span> data<span class="sc">$</span>y</span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>inside <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">-</span> <span class="fu">ceiling</span>(data<span class="sc">$</span>dist)</span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>Selfmade_pi_opt1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>inside)<span class="sc">/</span><span class="fu">length</span>(data<span class="sc">$</span>inside) <span class="sc">*</span> <span class="dv">4</span></span>
+<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>selfmade_pi_opt1 <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>inside) <span class="sc">/</span> <span class="fu">length</span>(data<span class="sc">$</span>inside) <span class="sc">*</span> <span class="dv">4</span></span>
 <span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a><span class="fu">head</span>(data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>           x           y      dist inside
-1  0.8771555 -0.08506678 0.7766381      1
-2  0.7046882 -0.28475429 0.5776705      1
-3  0.5319163 -0.38799774 0.4334772      1
-4  0.8814713 -0.30334503 0.8690099      1
-5 -0.2593019 -0.22595391 0.1182926      1
-6  0.5955902  0.18933788 0.3905766      1</code></pre>
+<pre><code>           x          y      dist inside
+1 -0.6068475 -0.9722662 1.3135654      0
+2 -0.5128652 -0.7091304 0.7658966      1
+3  0.9976461 -0.8307470 1.6854383      0
+4  0.5341546  0.5912639 0.6349140      1
+5 -0.6608721  0.3332499 0.5478075      1
+6 -0.6316362  0.9139095 1.2341949      0</code></pre>
 </div>
 </div>
 <p>As you can see, this way we already arrive a more precise solution much faster.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>selfmade_pi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.172</code></pre>
+<pre><code>[1] 3.096</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>Selfmade_pi_opt1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>selfmade_pi_opt1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.141376</code></pre>
+<pre><code>[1] 3.141585</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>pi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -483,25 +483,25 @@ Use a random number generator for a uniform distribution and save the result in 
 <div class="cell">
 <div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fl">1e8</span></span>
 <span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(<span class="at">n=</span>n),</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">runif</span>(<span class="at">n=</span>n)</span>
-<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dist <span class="ot">&lt;-</span> data<span class="sc">$</span>x<span class="sc">*</span>data<span class="sc">$</span>x <span class="sc">+</span> data<span class="sc">$</span>y<span class="sc">*</span>data<span class="sc">$</span>y</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(<span class="at">n =</span> n),</span>
+<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">runif</span>(<span class="at">n =</span> n)</span>
+<span id="cb30-5"><a href="#cb30-5" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb30-6"><a href="#cb30-6" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dist <span class="ot">&lt;-</span> data<span class="sc">$</span>x <span class="sc">*</span> data<span class="sc">$</span>x <span class="sc">+</span> data<span class="sc">$</span>y <span class="sc">*</span> data<span class="sc">$</span>y</span>
 <span id="cb30-7"><a href="#cb30-7" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>inside <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">-</span> <span class="fu">ceiling</span>(data<span class="sc">$</span>dist)</span>
-<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>Selfmade_pi_opt2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>inside)<span class="sc">/</span><span class="fu">length</span>(data<span class="sc">$</span>inside) <span class="sc">*</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb30-8"><a href="#cb30-8" aria-hidden="true" tabindex="-1"></a>selfmade_pi_opt2 <span class="ot">&lt;-</span> <span class="fu">sum</span>(data<span class="sc">$</span>inside) <span class="sc">/</span> <span class="fu">length</span>(data<span class="sc">$</span>inside) <span class="sc">*</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>selfmade_pi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.172</code></pre>
+<pre><code>[1] 3.096</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>Selfmade_pi_opt1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>selfmade_pi_opt1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.141376</code></pre>
+<pre><code>[1] 3.141585</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>Selfmade_pi_opt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>selfmade_pi_opt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.141793</code></pre>
+<pre><code>[1] 3.14157</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>pi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -534,52 +534,54 @@ Use a random number generator for a uniform distribution and save the result in 
 <section id="feasible-solution-5" class="level3">
 <h3 class="anchored" data-anchor-id="feasible-solution-5">Feasible solution</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fl">1e8</span><span class="sc">/</span><span class="dv">21</span>,<span class="dv">0</span>)</span>
-<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>quader <span class="ot">&lt;-</span><span class="fu">c</span>(<span class="dv">1</span>,</span>
-<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>           <span class="dv">1</span>,</span>
-<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>           <span class="dv">1</span>,</span>
-<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>           <span class="dv">1</span>,</span>
-<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>           <span class="dv">1</span>,</span>
-<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>           <span class="dv">9</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>           <span class="dv">9</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>           <span class="dv">9</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>           <span class="dv">8</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>           <span class="dv">8</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>           <span class="dv">8</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>           <span class="dv">7</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>           <span class="dv">6</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>           <span class="dv">6</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>           <span class="dv">5</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>           <span class="dv">4</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>           <span class="dv">5</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>           <span class="dv">4</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>           <span class="dv">3</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>           <span class="dv">2</span><span class="sc">/</span><span class="dv">10</span>,</span>
-<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>           <span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>)</span>
-<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(<span class="at">n=</span>n<span class="sc">*</span><span class="fu">length</span>(quader),<span class="at">min=</span>quader<span class="dv">-1</span><span class="sc">/</span><span class="dv">10</span>,<span class="at">max=</span>quader),</span>
-<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">runif</span>(<span class="at">n=</span>n<span class="sc">*</span><span class="fu">length</span>(quader),<span class="at">min=</span><span class="fu">rev</span>(quader)<span class="sc">-</span><span class="dv">1</span><span class="sc">/</span><span class="dv">10</span>,<span class="at">max=</span><span class="fu">rev</span>(quader))</span>
-<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dist <span class="ot">&lt;-</span> data<span class="sc">$</span>x<span class="sc">*</span>data<span class="sc">$</span>x <span class="sc">+</span> data<span class="sc">$</span>y<span class="sc">*</span>data<span class="sc">$</span>y</span>
-<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>inside <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">-</span> <span class="fu">ceiling</span>(data<span class="sc">$</span>dist)</span>
-<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>Selfmade_pi_opt3 <span class="ot">&lt;-</span> (<span class="fu">sum</span>(data<span class="sc">$</span>inside) <span class="sc">+</span> n <span class="sc">*</span> <span class="dv">65</span>)<span class="sc">/</span>(n <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">*</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>n <span class="ot">&lt;-</span> <span class="fu">round</span>(<span class="fl">1e8</span> <span class="sc">/</span> <span class="dv">21</span>, <span class="dv">0</span>)</span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>quader <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span>,</span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>  <span class="dv">9</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>  <span class="dv">9</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>  <span class="dv">9</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>  <span class="dv">8</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>  <span class="dv">8</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>  <span class="dv">8</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>  <span class="dv">7</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>  <span class="dv">6</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>  <span class="dv">6</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>  <span class="dv">5</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>  <span class="dv">5</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>  <span class="dv">4</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>  <span class="dv">3</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>  <span class="dv">2</span> <span class="sc">/</span> <span class="dv">10</span>,</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>  <span class="dv">1</span> <span class="sc">/</span> <span class="dv">10</span></span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-25"><a href="#cb39-25" aria-hidden="true" tabindex="-1"></a>data <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb39-26"><a href="#cb39-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> <span class="fu">runif</span>(<span class="at">n =</span> n <span class="sc">*</span> <span class="fu">length</span>(quader), <span class="at">min =</span> quader <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">10</span>, <span class="at">max =</span> quader),</span>
+<span id="cb39-27"><a href="#cb39-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> <span class="fu">runif</span>(<span class="at">n =</span> n <span class="sc">*</span> <span class="fu">length</span>(quader), <span class="at">min =</span> <span class="fu">rev</span>(quader) <span class="sc">-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">10</span>, <span class="at">max =</span> <span class="fu">rev</span>(quader))</span>
+<span id="cb39-28"><a href="#cb39-28" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb39-29"><a href="#cb39-29" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>dist <span class="ot">&lt;-</span> data<span class="sc">$</span>x <span class="sc">*</span> data<span class="sc">$</span>x <span class="sc">+</span> data<span class="sc">$</span>y <span class="sc">*</span> data<span class="sc">$</span>y</span>
+<span id="cb39-30"><a href="#cb39-30" aria-hidden="true" tabindex="-1"></a>data<span class="sc">$</span>inside <span class="ot">&lt;-</span> <span class="dv">2</span> <span class="sc">-</span> <span class="fu">ceiling</span>(data<span class="sc">$</span>dist)</span>
+<span id="cb39-31"><a href="#cb39-31" aria-hidden="true" tabindex="-1"></a>selfmade_pi_opt3 <span class="ot">&lt;-</span> (<span class="fu">sum</span>(data<span class="sc">$</span>inside) <span class="sc">+</span> n <span class="sc">*</span> <span class="dv">65</span>) <span class="sc">/</span> (n <span class="sc">*</span> <span class="dv">100</span>) <span class="sc">*</span> <span class="dv">4</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>selfmade_pi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.172</code></pre>
+<pre><code>[1] 3.096</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>Selfmade_pi_opt1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a>selfmade_pi_opt1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.141376</code></pre>
+<pre><code>[1] 3.141585</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>Selfmade_pi_opt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>selfmade_pi_opt2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.141793</code></pre>
+<pre><code>[1] 3.14157</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>Selfmade_pi_opt3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a>selfmade_pi_opt3</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 3.141596</code></pre>
+<pre><code>[1] 3.141601</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>pi</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

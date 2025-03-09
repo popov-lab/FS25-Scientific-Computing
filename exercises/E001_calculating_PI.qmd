@@ -33,13 +33,13 @@ Generation of a random position for a single dart within a square. The square ex
 Use a random number generator for a uniform distribution and save the result in the two variables x and y (GAP are placeholder)
 
 ```{r}
-x <- runif(n=GAP,min=GAP,max=GAP)
+x <- runif(n = GAP, min = GAP, max = GAP)
 y <- GAP
 ```
 
 ```{r echo=FALSE}
-x <- runif(n=1,min=-1,max=1)
-y <- runif(n=1,min=-1,max=1)
+x <- runif(n = 1, min = -1, max = 1)
+y <- runif(n = 1, min = -1, max = 1)
 ```
 
 ### 2. Step
@@ -56,7 +56,7 @@ print(dist)
 Create a decision rule and print "inside" if the point is inside the circle or "outside" if it is not.
 
 ```{r, results="hide", message=FALSE, warning=FALSE}
-if (dist <= GAP){
+if (dist <= GAP) {
   GAP
 } else {
   GAP
@@ -64,7 +64,7 @@ if (dist <= GAP){
 ```
 
 ```{r echo = FALSE, results="hide", message=FALSE, warning=FALSE}
-if (dist <= 1){
+if (dist <= 1) {
   print("inside")
 } else {
   print("outside")
@@ -79,12 +79,12 @@ Create now a loop (use for or while statement) and execute the code from steps 1
 
 ```{r echo = FALSE}
 for (i in 1:10) {
-  x <- runif(n=1,min=-1,max=1)
-  y <- runif(n=1,min=-1,max=1)
+  x <- runif(n = 1, min = -1, max = 1)
+  y <- runif(n = 1, min = -1, max = 1)
   dist <- x**2 + y**2
-  if (dist <= 1){
+  if (dist <= 1) {
     print("inside")
-    } else {
+  } else {
     print("outside")
   }
 }
@@ -105,7 +105,7 @@ print(n_insides)
 or more elegant write the results in a vector.
 
 ```{r}
-v_insides <- rep(x=0,10)
+v_insides <- rep(x = 0, 10)
 v_insides[2] <- 1
 print(v_insides)
 ```
@@ -114,12 +114,12 @@ If you use 1000 iteration you should became such a number
 
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
 n <- 1000
-v_insides <- rep(x=0,n)
+v_insides <- rep(x = 0, n)
 for (i in 1:n) {
-  x <- runif(n=1,min=-1,max=1)
-  y <- runif(n=1,min=-1,max=1)
+  x <- runif(n = 1, min = -1, max = 1)
+  y <- runif(n = 1, min = -1, max = 1)
   dist <- x**2 + y**2
-  if (dist <= 1){
+  if (dist <= 1) {
     v_insides[i] <- 1
   }
 }
@@ -131,12 +131,12 @@ sum(v_insides)
 As the final step, you now need to calculate PI from your result and compare it with the real one ;-)
 
 ```{r echo = FALSE}
-selfmade_pi <- sum(v_insides)/length(v_insides)*4
+selfmade_pi <- sum(v_insides) / length(v_insides) * 4
 ```
 
 ```{r}
 print(selfmade_pi)
-if (selfmade_pi == pi){
+if (selfmade_pi == pi) {
   print("YOU ARE UNBELIEFABLE")
 } else {
   print("Try more iterations !!! (or try the function round)")

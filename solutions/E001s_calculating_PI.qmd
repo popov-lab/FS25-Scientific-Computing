@@ -1,12 +1,7 @@
 ---
 title: "calculating PI"
 author: "Hubert Baechli"
-date: "`r Sys.Date()`"
-output: pdf_document
-header-includes:
-  - \usepackage{xcolor}
-  - \usepackage{titlesec}
-  - \titleformat{\subsubsection}[block]{\normalfont\normalsize\bfseries\color{green}}{}{0em}{}
+date: "2025-03-01"
 ---
 
 ```{r setup, include=FALSE}
@@ -38,15 +33,15 @@ Generation of a random position for a single dart within a square. The square ex
 Use a random number generator for a uniform distribution and save the result in the two variables x and y (GAP are placeholder)
 
 ```{r}
-x <- runif(n=GAP,min=GAP,max=GAP)
+x <- runif(n = GAP, min = GAP, max = GAP)
 y <- GAP
 ```
 
 ### Feasible solution
 
 ```{r}
-x <- runif(n=1,min=-1,max=1)
-y <- runif(n=1,min=-1,max=1)
+x <- runif(n = 1, min = -1, max = 1)
+y <- runif(n = 1, min = -1, max = 1)
 ```
 
 ## 2. Step
@@ -63,7 +58,7 @@ print(dist)
 Create a decision rule and print "inside" if the point is inside the circle or "outside" if it is not.
 
 ```{r results="hide", message=FALSE, warning=FALSE}
-if (dist <= GAP){
+if (dist <= GAP) {
   GAP
 } else {
   GAP
@@ -73,9 +68,9 @@ if (dist <= GAP){
 ### Feasible solution
 
 ```{r}
-if (dist <= 1){
+if (dist <= 1) {
   print("inside")
-  } else {
+} else {
   print("outside")
 }
 ```
@@ -90,12 +85,12 @@ Create now a loop (use for or while statement) and execute the code from steps 1
 
 ```{r}
 for (i in 1:10) {
-  x <- runif(n=1,min=-1,max=1)
-  y <- runif(n=1,min=-1,max=1)
+  x <- runif(n = 1, min = -1, max = 1)
+  y <- runif(n = 1, min = -1, max = 1)
   dist <- x**2 + y**2
-  if (dist <= 1){
+  if (dist <= 1) {
     print("inside")
-    } else {
+  } else {
     print("outside")
   }
 }
@@ -116,7 +111,7 @@ print(n_insides)
 or more elegant write the results in a vector.
 
 ```{r}
-v_insides <- rep(x=0,10)
+v_insides <- rep(x = 0, 10)
 v_insides[2] <- 1
 print(v_insides)
 ```
@@ -125,12 +120,12 @@ If you use 1000 iteration you should became such a number
 
 ```{r, echo = FALSE, message=FALSE, warning=FALSE}
 n <- 1000
-v_insides <- rep(x=0,n)
+v_insides <- rep(x = 0, n)
 for (i in 1:n) {
-  x <- runif(n=1,min=-1,max=1)
-  y <- runif(n=1,min=-1,max=1)
+  x <- runif(n = 1, min = -1, max = 1)
+  y <- runif(n = 1, min = -1, max = 1)
   dist <- x**2 + y**2
-  if (dist <= 1){
+  if (dist <= 1) {
     v_insides[i] <- 1
   }
 }
@@ -142,12 +137,12 @@ sum(v_insides)
 
 ```{r}
 n <- 1000
-v_insides <- rep(x=0,n)
+v_insides <- rep(x = 0, n)
 for (i in 1:n) {
-  x <- runif(n=1,min=-1,max=1)
-  y <- runif(n=1,min=-1,max=1)
+  x <- runif(n = 1, min = -1, max = 1)
+  y <- runif(n = 1, min = -1, max = 1)
   dist <- x**2 + y**2
-  if (dist <= 1){
+  if (dist <= 1) {
     v_insides[i] <- 1
   }
 }
@@ -160,12 +155,12 @@ As the final step, you now need to calculate PI from your result and compare it 
 ### Feasible solution
 
 ```{r}
-selfmade_pi <- sum(v_insides)/length(v_insides)*4
+selfmade_pi <- sum(v_insides) / length(v_insides) * 4
 print(selfmade_pi)
 ```
 
 ```{r}
-if (selfmade_pi == pi){
+if (selfmade_pi == pi) {
   print("YOU ARE UNBELIEFABLE")
 } else {
   print("Try more iterations !!! (or try the function round)")
@@ -189,12 +184,12 @@ Although 10e8 iterations are performed here, it computes almost without any dela
 ```{r}
 n <- 1e8
 data <- data.frame(
-  x = runif(n=n,min=-1,max=1),
-  y = runif(n=n,min=-1,max=1)
-  )
-data$dist <- data$x*data$x + data$y*data$y
+  x = runif(n = n, min = -1, max = 1),
+  y = runif(n = n, min = -1, max = 1)
+)
+data$dist <- data$x * data$x + data$y * data$y
 data$inside <- 2 - ceiling(data$dist)
-Selfmade_pi_opt1 <- sum(data$inside)/length(data$inside) * 4
+selfmade_pi_opt1 <- sum(data$inside) / length(data$inside) * 4
 
 head(data)
 ```
@@ -203,7 +198,7 @@ As you can see, this way we already arrive a more precise solution much faster.
 
 ```{r}
 selfmade_pi
-Selfmade_pi_opt1
+selfmade_pi_opt1
 pi
 ```
 
@@ -212,14 +207,15 @@ pi
 ```{r echo = FALSE}
 n_plot <- 1e3
 data <- data.frame(
-  x = runif(n=n_plot, min = -1, max = 1),
-  y = runif(n=n_plot, min = -1, max = 1)
-  )
-data$dist <- data$x*data$x + data$y*data$y
+  x = runif(n = n_plot, min = -1, max = 1),
+  y = runif(n = n_plot, min = -1, max = 1)
+)
+data$dist <- data$x * data$x + data$y * data$y
 data$inside <- 2 - ceiling(data$dist)
 colors <- heat.colors(2)
-plot(data$x,data$y, 
-     col = colors[data$inside + 1])
+plot(data$x, data$y,
+  col = colors[data$inside + 1]
+)
 ```
 
 ## Other ways of optimization
@@ -231,18 +227,18 @@ R is a programming language for lazy people. Often, functions have preset defaul
 ```{r}
 n <- 1e8
 data <- data.frame(
-  x = runif(n=n),
-  y = runif(n=n)
-  )
-data$dist <- data$x*data$x + data$y*data$y
+  x = runif(n = n),
+  y = runif(n = n)
+)
+data$dist <- data$x * data$x + data$y * data$y
 data$inside <- 2 - ceiling(data$dist)
-Selfmade_pi_opt2 <- sum(data$inside)/length(data$inside) * 4
+selfmade_pi_opt2 <- sum(data$inside) / length(data$inside) * 4
 ```
 
 ```{r}
 selfmade_pi
-Selfmade_pi_opt1
-Selfmade_pi_opt2
+selfmade_pi_opt1
+selfmade_pi_opt2
 pi
 ```
 
@@ -251,14 +247,15 @@ pi
 ```{r echo = FALSE}
 n_plot <- 1e3
 data <- data.frame(
-  x = runif(n=n_plot),
-  y = runif(n=n_plot)
-  )
-data$dist <- data$x*data$x + data$y*data$y
+  x = runif(n = n_plot),
+  y = runif(n = n_plot)
+)
+data$dist <- data$x * data$x + data$y * data$y
 data$inside <- 2 - ceiling(data$dist)
 colors <- heat.colors(2)
-plot(data$x,data$y, 
-     col = colors[data$inside + 1])
+plot(data$x, data$y,
+  col = colors[data$inside + 1]
+)
 ```
 
 ### Explanation
@@ -266,78 +263,83 @@ plot(data$x,data$y,
 Since the effect of reducing the total area to a quarter is rather small, here is a clearer version. We now throw the darts only into fields where we expect a distinction. For fields in the 10x10 grid where we already know the answer, we do not throw any darts.
 
 ```{r echo = FALSE}
-quader <-c(1,
-           1,
-           1,
-           1,
-           1,
-           9/10,
-           9/10,
-           9/10,
-           8/10,
-           8/10,
-           8/10,
-           7/10,
-           6/10,
-           6/10,
-           5/10,
-           4/10,
-           5/10,
-           4/10,
-           3/10,
-           2/10,
-           1/10)
+quader <- c(
+  1,
+  1,
+  1,
+  1,
+  1,
+  9 / 10,
+  9 / 10,
+  9 / 10,
+  8 / 10,
+  8 / 10,
+  8 / 10,
+  7 / 10,
+  6 / 10,
+  6 / 10,
+  5 / 10,
+  4 / 10,
+  5 / 10,
+  4 / 10,
+  3 / 10,
+  2 / 10,
+  1 / 10
+)
 data <- data.frame(
-  x = runif(n=n_plot,min=quader-1/10,max=quader),
-  y = runif(n=n_plot,min=rev(quader)-1/10,max=rev(quader))
-  )
-data$dist <- data$x*data$x + data$y*data$y
+  x = runif(n = n_plot, min = quader - 1 / 10, max = quader),
+  y = runif(n = n_plot, min = rev(quader) - 1 / 10, max = rev(quader))
+)
+data$dist <- data$x * data$x + data$y * data$y
 data$inside <- 2 - ceiling(data$dist)
 colors <- heat.colors(2)
-plot(data$x,data$y, 
-     col = colors[data$inside + 1])
+plot(data$x, data$y,
+  col = colors[data$inside + 1]
+)
 
 ```
 
 ### Feasible solution
 
 ```{r}
-n <- round(1e8/21,0)
-quader <-c(1,
-           1,
-           1,
-           1,
-           1,
-           9/10,
-           9/10,
-           9/10,
-           8/10,
-           8/10,
-           8/10,
-           7/10,
-           6/10,
-           6/10,
-           5/10,
-           4/10,
-           5/10,
-           4/10,
-           3/10,
-           2/10,
-           1/10)
+n <- round(1e8 / 21, 0)
+quader <- c(
+  1,
+  1,
+  1,
+  1,
+  1,
+  9 / 10,
+  9 / 10,
+  9 / 10,
+  8 / 10,
+  8 / 10,
+  8 / 10,
+  7 / 10,
+  6 / 10,
+  6 / 10,
+  5 / 10,
+  4 / 10,
+  5 / 10,
+  4 / 10,
+  3 / 10,
+  2 / 10,
+  1 / 10
+)
 data <- data.frame(
-  x = runif(n=n*length(quader),min=quader-1/10,max=quader),
-  y = runif(n=n*length(quader),min=rev(quader)-1/10,max=rev(quader))
-  )
-data$dist <- data$x*data$x + data$y*data$y
+  x = runif(n = n * length(quader), min = quader - 1 / 10, max = quader),
+  y = runif(n = n * length(quader), min = rev(quader) - 1 / 10, max = rev(quader))
+)
+data$dist <- data$x * data$x + data$y * data$y
 data$inside <- 2 - ceiling(data$dist)
-Selfmade_pi_opt3 <- (sum(data$inside) + n * 65)/(n * 100) * 4
+selfmade_pi_opt3 <- (sum(data$inside) + n * 65) / (n * 100) * 4
 
 ```
 
 ```{r}
 selfmade_pi
-Selfmade_pi_opt1
-Selfmade_pi_opt2
-Selfmade_pi_opt3
+selfmade_pi_opt1
+selfmade_pi_opt2
+selfmade_pi_opt3
 pi
 ```

@@ -2,6 +2,8 @@ project:
   type: website
   output-dir: docs
   resources: resources/cheatsheets/*
+  post-render: 
+    - ./purge_css.sh
 
 website:
   title: "FS25: Scientific Computing"
@@ -29,6 +31,10 @@ website:
 format: 
   html: 
     toc: true
+    theme: 
+      dark: [cosmo, theme-dark.scss]
+      light: cosmo
+    highlight-style: monokai
 
 execute: 
   freeze: true

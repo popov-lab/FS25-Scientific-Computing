@@ -1,1 +1,0 @@
-Sitemap: https://popov-lab.github.io/FS25-Scientific-Computing/sitemap.xml

@@ -2,8 +2,6 @@ project:
   type: website
   output-dir: docs
   resources: resources/cheatsheets/*
-  post-render: 
-    - ./purge_css.sh
 
 website:
   title: "FS25: Scientific Computing"

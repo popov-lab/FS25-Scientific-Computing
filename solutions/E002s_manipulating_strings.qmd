@@ -1,0 +1,292 @@
+---
+title: "E002: Manipulating strings"
+author: "Hubert Baechli"
+date: "2025-03-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Programming exercise
+
+Below are some exercises that should help you learn the most important basic built in functions and how to incorporate them into your own functions. This sheet focuses on letters and strings.
+
+```{r, echo = FALSE}
+GAP <- 1
+CONDITION1 <- 0
+CONDITION2 <- 0
+```
+
+## 1. Hello world
+
+Let's start with the obligatory 'Hello World'.
+
+::: callout-note
+#### Use this
+```{r}
+greet <- function() {
+  print("Hello world")
+}
+```
+:::
+
+```{r}
+greet()
+```
+
+## 2. Personal Greetings (easy)
+
+Since the first example was very impersonal, now write a function that uses your name.
+
+::: callout-warning
+#### Hint:
+Replace GAP with something appropriate.
+```{r}
+greet_person <- function(name) {
+  text <- paste(GAP, name, sep = GAP)
+  print(text)
+}
+```
+:::
+
+***It should output something with it.***
+
+```{r, echo = FALSE}
+greet_person <- function(name) {
+  text <- paste("Hello", name, sep = " ")
+  print(text)
+}
+```
+
+```{r}
+greet_person("Hubi")
+```
+
+::: callout-tip
+#### Feasible solution:
+```{r}
+greet_person <- function(name) {
+  text <- paste("Hello", name, sep = " ")
+  print(text)
+}
+```
+:::
+
+## 3. Fancy Greetings (medium)
+
+To make it a bit more exciting, the next function should output something different depending on the time of day. So that the function should print 'Good morning' until 12, and after that, print 'Good afternoon'
+
+::: callout-warning
+#### Hint:
+Fill out the body of the function below. You should use the `if` and `else` statements we learned in class to complete the assignment.
+```{r}
+greet_time <- function(name, hour = current_hour()) {
+  # put code here
+}
+```
+:::
+
+::: callout-note
+#### Use this:
+Here is a helper function to determine the current hour of the day:
+```{r}
+current_hour <- function() {
+  # get the current time from the machine 
+  current_time <- Sys.time()
+
+  # extract the hour from the full time string 
+  hour_string <- format(current_time, "%H")
+
+  # convert to a number and return 
+  # return() is unnecessary: functions return the value of the last expression
+  as.numeric(hour_string) 
+}
+```
+
+You can use it like this:
+```{r}
+current_hour()
+```
+:::
+
+```{r, echo = FALSE}
+greet_time <- function(name, hour = current_hour()) {
+  if (hour < 12) {
+    text <- "Good morning"
+  } else {
+    text <- "Good afternoon"
+  }
+  text <- paste(text, name, sep = " ")
+  print(text)
+}
+```
+
+By default the function should use the current time, but to test it you can give it directly the hour as an argument:
+
+```{r}
+greet_time("Hubi")
+greet_time("Hubi", hour = 11)
+greet_time("Hubi", hour = 13)
+```
+
+::: callout-tip
+#### Feasible solution:
+```{r}
+greet_time <- function(name, hour = current_hour()) {
+  if (hour < 12) {
+    text <- "Good morning"
+  } else {
+    text <- "Good afternoon"
+  }
+  text <- paste(text, name, sep = " ")
+  print(text)
+}
+```
+:::
+
+## 4. Very fancy Greetings (harder)
+
+If the last exercise wasn't fancy enough, you can extend it as follows.
+
+::: callout-warning
+#### Hint:
+Fill out the conditions and the body of the function below.
+```{r, results="hide"}
+if (CONDITION1) {
+  # something happens here if condition1 is TRUE
+} else if (CONDITION2) {
+  # something else happens here if condition1 is FALSE but condition2 is TRUE
+} else {
+  # a final thing happens if both condition1 and condition2 are FALSE
+}
+```
+:::
+
+***Resulting in something like that ;-)***
+
+```{r, echo = FALSE}
+very_fancy_greet <- function(name, hour = current_hour()) {
+  if (hour <= 12) {
+    text <- "Good morning"
+  } else if (hour <= 18) {
+    text <- "Good afternoon"
+  } else if (hour <= 22) {
+    text <- "Good evening"
+  } else {
+    text <- "Go to bed"
+  }
+  text <- paste(text, name, sep = " ")
+  print(text)
+}
+```
+
+```{r}
+very_fancy_greet("Hubi", hour = 23)
+```
+
+::: callout-tip
+#### Feasible solution:
+```{r}
+very_fancy_greet <- function(name, hour = current_hour()) {
+  if (hour <= 12) {
+    text <- "Good morning"
+  } else if (hour <= 18) {
+    text <- "Good afternoon"
+  } else if (hour <= 22) {
+    text <- "Good evening"
+  } else {
+    text <- "Go to bed"
+  }
+  text <- paste(text, name, sep = " ")
+  print(text)
+}
+```
+:::
+
+## 5. Reverse Strings (harder)
+
+**Goal**: Write a function which reverses a string and makes all letters uppercase.
+
+Your function should do this
+
+```{r, echo = FALSE}
+rev_string <- function(text) {
+  text <- toupper(text)
+  vec_text <- strsplit(text, "")[[1]]
+  rev_vec <- rev(vec_text)
+  paste(rev_vec, collapse = "")
+}
+```
+
+```{r}
+rev_string("Hubi")
+```
+
+::: callout-warning
+#### Here are some tips:
+A very useful function that you might use at some point during data preparation is this:
+```{r}
+words <- strsplit("Hello World", split = " ")
+```
+
+The result is here a List of words
+```{r}
+words
+words[[1]] # vector
+```
+
+You can also use this for a own function that reverses a string:
+```{r}
+toupper("text")
+rev(c(1, 2, 3))
+```
+:::
+
+Combine the functions above in order to complete assignment.
+
+::: callout-tip
+#### Feasible solution:
+```{r}
+rev_string <- function(text) {
+  text <- toupper(text)
+  vec_text <- strsplit(text, "")[[1]]
+  rev_vec <- rev(vec_text)
+  paste(rev_vec, collapse = "")
+}
+```
+:::
+
+## 6. Palindrome (combined)
+
+If you've mastered the last exercise, it's just a small step to write a function that checks if a word is a palindrome.
+
+***Your function should give out TRUE if the word is a palindrome.***
+
+::: callout-warning
+#### Hint:
+You can use your function "rev_string()" inside the new function
+:::
+```{r, echo = FALSE}
+is_palindrome <- function(text) {
+  upper_text <- toupper(text)
+  rev_text <- rev_string(upper_text)
+  upper_text == rev_text
+}
+```
+
+```{r}
+is_palindrome("Hubi")
+is_palindrome("Anna")
+```
+
+::: callout-tip
+#### Feasible solution:
+```{r}
+is_palindrome <- function(text) {
+  upper_text <- toupper(text)
+  rev_text <- rev_string(upper_text)
+  upper_text == rev_text
+}
+```
+:::

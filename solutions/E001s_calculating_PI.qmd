@@ -1,5 +1,5 @@
 ---
-title: "calculating PI"
+title: "E001: calculating PI"
 author: "Hubert Baechli"
 date: "2025-03-01"
 ---

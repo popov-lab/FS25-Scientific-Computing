@@ -14,6 +14,8 @@ GAP <- 1
 In contrast to the simple method described below, the first exercise should calculates our own PI.
 
 ::: callout-note
+#### Use this:
+
 ```{r}
 pi
 ```
@@ -35,8 +37,10 @@ Generation of a random position for a single dart within a square. The square ex
 Use a random number generator for a uniform distribution and save the result in the two variables x and y.
 
 ::: callout-warning
-# Hint
+#### Hint:
+
 Replace GAP with something appropriate.
+
 ```{r}
 x <- runif(n = GAP, min = GAP, max = GAP)
 y <- GAP
@@ -44,7 +48,7 @@ y <- GAP
 :::
 
 ::: callout-tip
-# Feasible solution
+#### Feasible solution:
 
 ```{r}
 x <- runif(n = 1, min = -1, max = 1)
@@ -57,7 +61,8 @@ y <- runif(n = 1, min = -1, max = 1)
 Now calculate the distance from this position to the center. You can use the following simplified formula for our chosen square
 
 ::: callout-note
-# Use this
+#### Use this:
+
 ```{r}
 dist <- x**2 + y**2
 print(dist)
@@ -69,7 +74,8 @@ print(dist)
 Create a decision rule and print "inside" if the point is inside the circle or "outside" if it is not.
 
 ::: callout-warning
-# Hint
+#### Hint:
+
 Replace GAP with something appropriate.
 
 ```{r results="hide", message=FALSE, warning=FALSE}
@@ -82,7 +88,7 @@ if (dist <= GAP) {
 :::
 
 ::: callout-tip
-# Feasible solution
+#### Feasible solution:
 
 ```{r}
 if (dist <= 1) {
@@ -98,13 +104,13 @@ if (dist <= 1) {
 Create now a loop (use for or while statement) and execute the code from steps 1 to 3 within it. You should get something like that now
 
 ::: callout-warning
-# Hint
+#### Hint:
 
 Use may 10 iteration for the beginning
 :::
 
 ::: callout-tip
-# Feasible solution
+#### Feasible solution:
 
 ```{r}
 for (i in 1:10) {
@@ -125,9 +131,8 @@ for (i in 1:10) {
 Copy now the code from Step 4 and modify it in a way that instead of outputting a result for each point, it sums up the number of "insides".
 
 ::: callout-warning
-# Hint
+#### Hint:
 Use something like that,
-
 ```{r}
 n_insides <- 0
 n_insides <- n_insides + 1
@@ -135,7 +140,6 @@ print(n_insides)
 ```
 
 or more elegant write the results in a vector.
-
 ```{r}
 v_insides <- rep(x = 0, 10)
 v_insides[2] <- 1
@@ -161,8 +165,7 @@ sum(v_insides)
 ```
 
 ::: callout-tip
-# Feasible solution
-
+#### Feasible solution:
 ```{r}
 n <- 1000
 v_insides <- rep(x = 0, n)
@@ -188,13 +191,12 @@ print(selfmade_pi)
 ```
 
 ::: callout-warning
-# Hint
-![](images/Bild1.png)
+#### Hint:
+![](/images/Bild1.png)
 :::
 
 ::: callout-tip
-# Feasible solution
-
+#### Feasible solution:
 ```{r}
 selfmade_pi <- sum(v_insides) / length(v_insides) * 4
 print(selfmade_pi)
@@ -202,7 +204,7 @@ print(selfmade_pi)
 :::
 
 ::: callout-note
-# Use this to checking the numbers of correct digits of pi
+#### Use this to checking the numbers of correct digits of pi:
 ```{r}
 check_pi_digits <- function(aprox_pi) {
   for (i in 1:20) {  
@@ -218,23 +220,24 @@ check_pi_digits(selfmade_pi)
 ```
 :::
 
-::: callout-caution
 # Outlook
 
 If you, as we hoped, have been playing around with the code, you’ve probably noticed that it takes exponentially more time with a larger number of iterations! Therefore, here are some ways to optimize the code.
 
+::: callout-caution
+#### Outlook:
 ## Loops and decision rules
 
 These are very helpful because they are easy to read and interpret. However, they are very slow! Using the analogy Ven has used, each line is a page in a book. A loop means you constantly have to flip back and forth through the pages. In contrast, vector operations are much faster because it is already known in advance which operations need to be performed for the given values.
 
 ### Here a first example
 
-Although 10e8 iterations are performed here, it computes almost without any delay.
+Although 10e6 iterations are performed here, it computes almost without any delay.
 
 *Hint: You may try to understand why this gives the same result.*
 
 ```{r}
-n <- 1e8
+n <- 10e6
 data <- data.frame(
   x = runif(n = n, min = -1, max = 1),
   y = runif(n = n, min = -1, max = 1)
@@ -249,6 +252,8 @@ head(data)
 As you can see, this way we already arrive a more precise solution much faster.
 
 ```{r}
+selfmade_pi_opt1
+pi
 check_pi_digits(selfmade_pi_opt1)
 ```
 
@@ -275,7 +280,7 @@ R is a programming language for lazy people. Often, functions have preset defaul
 *Hint: May try ?runif to understand why this gives still the same result.*
 
 ```{r}
-n <- 1e8
+n <- 10e6
 data <- data.frame(
   x = runif(n = n),
   y = runif(n = n)
@@ -286,6 +291,8 @@ selfmade_pi_opt2 <- sum(data$inside) / length(data$inside) * 4
 ```
 
 ```{r}
+selfmade_pi_opt2
+pi
 check_pi_digits(selfmade_pi_opt2)
 ```
 
@@ -349,7 +356,7 @@ plot(data$x, data$y,
 ### Feasible solution
 
 ```{r}
-n <- round(1e8 / 21, 0)
+n <- round(21e6 / 21, 0)
 quader <- c(
   1,
   1,
@@ -384,6 +391,8 @@ selfmade_pi_opt3 <- (sum(data$inside) + n * 65) / (n * 100) * 4
 ```
 
 ```{r}
+selfmade_pi_opt3
+pi
 check_pi_digits(selfmade_pi_opt3)
 ```
 :::

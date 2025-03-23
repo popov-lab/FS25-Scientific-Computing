@@ -1,0 +1,471 @@
+---
+title: "P002: Logo Promptoption"
+author: "Hubert Baechli"
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Logo
+
+**Goal:** Programming a simple language with R
+
+Logo goes back much earlier than the Apple II, it was developed in 1967 by Cynthia Solomon, Wally Feurzig, and Seymour Papert. That's five years before C and 24 years before Python! The three worked at Bolt, Beranek, and Newman (BBN), famous for all kinds of other computing history. BBN built the first Interface Message Processors (early routers) in 1968 for the ARPANET, which would evolve into the modern internet. [...learn more](https://learn.adafruit.com/program-logo-on-an-apple-ii/what-is-logo)
+
+## Basic Commands
+
+Implementing the basic commands [see "Hello Turtle"](https://learn.adafruit.com/program-logo-on-an-apple-ii/hello-turtle)
+
+### NEW
+
+Initializing the game
+
+```{r}
+NEW <- function (size, data = LOGO) {
+  field_name <- deparse(substitute(data))
+  pos <- 1
+  heading <- 0
+  turtle <- TRUE
+  turtle_color <- "red"
+  path_color <- "blue"
+  path <- data.frame(x = 0, y = 0, rad = 0, color = "transparent")
+  field <- NULL
+  data <- list(field = field,
+               size = abs(size),
+               field_name = toupper(field_name),
+               pos = pos,
+               heading = heading,
+               turtle_color = turtle_color,
+               turtle = turtle,
+               path_color = path_color,
+               path = path)
+  data <- CLEARSCREEN(data)
+  data
+}
+```
+
+### CLEARSCREEN (CS)
+
+Clear the screen and initializing the field
+
+```{r}
+CLEARSCREEN <- function (data = LOGO) {
+  plot.new()
+  plot.window(xlim = c(-data$size, data$size),
+              ylim = c(-data$size, data$size))
+  box()
+  grid()
+  axis(1)
+  axis(2)
+  data$field <- recordPlot()
+  plot_turtle(data, show = data$turtle)
+  data
+}
+```
+
+```{r}
+CS <- function (data = LOGO) {
+  CLEARSCREEN(data)
+}
+```
+
+### HIDETURTLE (HT)
+
+Don't show the turtle cursor.
+
+```{r}
+HIDETURTLE <- function (data) {
+  data$turtle <- FALSE
+  replayPlot(data$field)
+  data
+}
+```
+
+```{r}
+HT <- function (data) {
+  HIDETURTLE(data)
+}
+```
+
+### SHOWTURTLE (ST)
+
+Show the turtle cursor.
+
+```{r}
+plot_turtle <- function (data, show) {
+  if (show) {
+    points(x = data$path$x[data$pos],
+           y = data$path$y[data$pos],
+           col=data$turtle_color,
+           pch = 16,
+           cex = 1.5)
+    arrow_length <- 0.6
+    angle <- data$path$rad[data$pos]
+    arrows(data$path$x[data$pos],
+           data$path$y[data$pos],
+           data$path$x[data$pos] + cos(angle) * arrow_length,
+           data$path$y[data$pos] + sin(angle) * arrow_length,
+           col = data$turtle_color,
+           code = 2,
+           length = 0.1,
+           angle = 20,
+           lwd = 2)
+  }
+}
+```
+
+```{r}
+SHOWTURTLE <- function (data) {
+  data$turtle <- TRUE
+  data$field <- recordPlot()
+  replayPlot(data$field)
+  plot_turtle(data, show = data$turtle)
+  data
+}
+```
+
+```{r}
+ST <- function (data) {
+  SHOWTURTLE(data)
+}
+```
+
+### FORWARD (FD)
+
+Move forward *steps*.
+
+```{r}
+record_path <- function (data, x, y, show = TRUE) {
+  if (show) { 
+    color <- data$path_color 
+    } else {
+    color <- "transparent"
+    }
+  rad <- data$path$rad[data$pos]
+  data$path <- rbind(data$path, data.frame(x, y, rad, color))
+  data$pos <- data$pos + 1
+  data
+}
+```
+
+```{r}
+FORWARD <- function (steps, data) {
+  replayPlot(data$field)
+  angle <- data$path$rad[data$pos] 
+  x0 <- data$path$x[data$pos]
+  y0 <- data$path$y[data$pos]
+  x1 <- x0 + cos(angle) * steps
+  y1 <- y0 + sin(angle) * steps
+  segments(x0, y0, x1, y1,
+           col = data$path_color,
+           lwd = 2)
+  data$field <- recordPlot()
+  data <- record_path(data, x1, y1)
+  plot_turtle(data, show = data$turtle)
+  data
+}
+```
+
+```{r}
+FD <- function (steps, data) {
+  FORWARD(steps, data)
+}
+```
+
+### BACK (BK)
+
+Move back *steps*.
+
+```{r}
+BACK <- function (steps, data) {
+  FORWARD(-steps, data)
+}
+```
+
+```{r}
+BK <- function (steps, data) {
+  BACK(steps, data)
+}
+```
+
+### LEFT (LT)
+
+Turn left this many degrees. Negative degrees work too, they'll turn it right.
+
+```{r}
+LEFT <- function (degs, data) {
+  replayPlot(data$field)
+  data$heading <- data$heading + degs
+  data$path$rad[data$pos] <- data$heading * pi / 180
+  plot_turtle(data, show = data$turtle)
+  data
+}
+```
+
+```{r}
+LT <- function (degs, data) {
+  LEFT(degs, data)
+}
+```
+
+### RIGHT (RT)
+
+Turn right this many degrees.
+
+```{r}
+RIGHT <- function (degs, data) {
+  LEFT(-degs, data)
+}
+```
+
+```{r}
+RT <- function (degs, data) {
+  RIGHT(degs, data)
+}
+```
+
+### SETHEADING (SH)
+
+Turn to an absolute heading of *degrees*.
+
+```{r}
+SETHEADING <- function (deg, data) {
+  replayPlot(data$field)
+  data$heading <- deg
+  data$path$rad[data$pos] <- data$heading * pi / 180
+  plot_turtle(data, show = data$turtle)
+  data
+}
+```
+
+```{r}
+SH <- function (deg, data) {
+  SETHEADING(deg, data)
+}
+```
+
+### SETPOS (SP)
+
+Set the position to *x, y* coordinates. These are Cartesian, so 0,0 is the middle of the screen.
+
+```{r}
+SETPOS <- function (x1, y1, data) {
+  replayPlot(data$field)
+  x0 <- data$path$x[data$pos]
+  y0 <- data$path$y[data$pos]
+  segments(x0, y0, x1, y1,
+           col = "transparent",
+           lwd = 2)
+  data$field <- recordPlot()
+  data <- record_path(data, x1, y1, show = FALSE)
+  plot_turtle(data, show = data$turtle)
+  data
+}
+```
+
+```{r}
+SP <- function (x1, y1, data) {
+  SETPOS(x1, y1, data)
+}
+```
+
+### HOME
+
+Move back to the home position.
+
+```{r}
+HOME <- function (data) {
+  SETPOS(x1 = 0, y1 = 0, data)
+}
+```
+
+### SETX (SX)
+
+Set the horizontal position to *x*.
+
+```{r}
+SETX <- function (x1, data) {
+  SETPOS(x1, y1 = data$path$y[data$pos], data)
+}
+```
+
+```{r}
+SX <- function (x1, data) {
+  SETX(x1, data)
+}
+```
+
+### SETY (SY)
+
+Set the vertical position to *y*.
+
+```{r}
+SETY <- function (y1, data) {
+  SETPOS(x1 = data$path$x[data$pos], y1, data)
+}
+```
+
+```{r}
+SY <- function (y1, data) {
+  SETY(y1, data)
+}
+```
+
+## Run Game
+
+```{r fig.width=8, fig.height=8}
+LOGO <- NEW(5, LOGO)
+LOGO <- HT(LOGO)
+LOGO <- FD(3, LOGO)
+LOGO <- ST(LOGO)
+LOGO <- CS(LOGO)
+LOGO <- HOME(LOGO)
+LOGO <- FD(2, LOGO)
+LOGO <- LT(77, LOGO)
+LOGO <- FD(3, LOGO)
+LOGO <- RT(243, LOGO)
+LOGO <- FD(3, LOGO)
+LOGO <- SP(-2,-4, LOGO)
+LOGO <- SH(100, LOGO)
+LOGO <- FD(7, LOGO)
+LOGO <- SX(-2, LOGO)
+LOGO <- BK(7, LOGO)
+LOGO <- SY(4, LOGO)
+```
+
+# Additional Commands
+
+## Restore Game
+
+### COPYPATH (CP)
+
+Copy or store a path.
+
+```{r}
+COPYPATH <- function (data) {
+  data$path
+}
+```
+
+```{r}
+CP <- function (data) {
+  COPYPATH(data)
+}
+```
+
+### PASTEPATH (PP)
+
+```{r}
+PASTEPATH <- function (data, path, add = FALSE) {
+  if (add) {
+      data$path <- rbind(data$path, path)
+    } else {
+      data$path <- path
+    }
+  data$pos <- nrow(data$path)
+  data$heading <- (data$path$rad[data$pos] / pi * 180) %% 360
+  replayPlot(data$field)
+  for (i in 2:nrow(data$path)) {
+    segments(x0 = data$path$x[i-1],
+             y0 = data$path$y[i-1],
+             x1 = data$path$x[i],
+             y1 = data$path$y[i],
+             col = data$path$col[i],
+             lwd = 2)
+  }
+  data$field <- recordPlot()
+  plot_turtle(data, show = data$turtle)
+  data
+}
+```
+
+```{r}
+PP <- function (data, path, add = FALSE) {
+  PASTEPATH(data, path, add)
+}
+```
+
+### Outcome
+
+```{r fig.width=8, fig.height=8}
+tmp <- CP(LOGO)
+LOGO2 <- NEW(7, Logo2)
+LOGO2 <- BK(4, LOGO2)
+LOGO2 <- PP(LOGO2, tmp, add = TRUE)
+```
+
+# Prompt option
+
+## Single Function Prompt
+
+### Clean strings
+
+```{r}
+clean_prompt <- function (Prompt) {
+  Prompt <- trimws(Prompt)
+  Prompt <- toupper(Prompt)
+  Prompt <- gsub("\\[", " [ ", Prompt)
+  Prompt <- gsub("\\]", " ] ", Prompt)
+  Prompt <- gsub("\\s+", " ", Prompt)
+  Prompt
+}
+```
+
+```{r}
+Test_Prompt = "  NEW   -7    "
+clean_prompt(Test_Prompt)
+```
+
+### Create Calls from a String
+
+```{r}
+run_prompt <- function (Prompt, data = LOGO) {
+  CleanPrompt <- clean_prompt(Prompt)
+  vec_Prompt <- strsplit(CleanPrompt, " ")[[1]]
+  
+  func <- grep("^[A-Z]+$", vec_Prompt, value = FALSE)
+  value <- grep("^[A-Z]+$", vec_Prompt, value = TRUE)
+  value <- lapply(value, as.name)
+  vec_Prompt[func] <- value
+  
+  num <- grep("^-?[0-9]+$", vec_Prompt, value = FALSE)
+  value <- grep("^-?[0-9]+$", vec_Prompt, value = TRUE)
+  value <- lapply(value, as.numeric)
+  vec_Prompt[num] <- value
+  
+  vec_Prompt <- c(vec_Prompt, as.name(data$field_name))
+  
+  run_Prompt <- as.call(vec_Prompt)
+  eval(run_Prompt)
+}
+```
+
+```{r fig.width=8, fig.height=8}
+Test_Prompt = "  FD  -3  "
+LOGO2 <- run_prompt(Test_Prompt, LOGO2)
+```
+
+### Outcome
+
+```{r fig.width=8, fig.height=8}
+LOGO <- NEW(5)
+LOGO <- run_prompt("HT")
+LOGO <- run_prompt("FD 3")
+LOGO <- run_prompt("ST")
+LOGO <- run_prompt("CS")
+LOGO <- run_prompt("HOME")
+LOGO <- run_prompt("FD 2")
+LOGO <- run_prompt("LT 77")
+LOGO <- run_prompt("FD 3")
+LOGO <- run_prompt("RT 243")
+LOGO <- run_prompt("FD 3")
+LOGO <- run_prompt("SP -2 -4")
+LOGO <- run_prompt("SH 100")
+LOGO <- run_prompt("FD 7")
+LOGO <- run_prompt("SX -2")
+LOGO <- run_prompt("BK 7")
+LOGO <- run_prompt("SY 4")
+
+```

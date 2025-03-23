@@ -1,0 +1,590 @@
+---
+title: "P003: Logo Repeat"
+author: "Hubert Baechli"
+date: "`r Sys.Date()`"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(magick)
+```
+
+# Logo
+
+**Goal:** Programming a simple language with R
+
+Logo goes back much earlier than the Apple II, it was developed in 1967 by Cynthia Solomon, Wally Feurzig, and Seymour Papert. That's five years before C and 24 years before Python! The three worked at Bolt, Beranek, and Newman (BBN), famous for all kinds of other computing history. BBN built the first Interface Message Processors (early routers) in 1968 for the ARPANET, which would evolve into the modern internet. [...learn more](https://learn.adafruit.com/program-logo-on-an-apple-ii/what-is-logo)
+
+## Basic Commands
+
+Implementing the basic commands [see "Hello Turtle"](https://learn.adafruit.com/program-logo-on-an-apple-ii/hello-turtle)
+
+### CLEARSCREEN (CS)
+
+Clear the screen and initializing the field
+
+```{r}
+CLEARSCREEN <- function (data) {
+  data <- new_field(5)
+}
+```
+
+```{r}
+CS <- function (data) {
+  CLEARSCREEN(data)
+}
+```
+
+### HIDETURTLE (HT)
+
+Don't show the turtle cursor.
+
+```{r}
+HIDETURTLE <- function (data) {
+  data$turtle <- FALSE
+  data <- record_path(data, turtle = data$turtle)
+  data
+}
+```
+
+```{r}
+HT <- function (data) {
+  HIDETURTLE(data)
+}
+```
+
+### SHOWTURTLE (ST)
+
+Show the turtle cursor.
+
+```{r}
+SHOWTURTLE <- function (data) {
+  data$turtle <- TRUE
+  data <- record_path(data, turtle = data$turtle)
+  data
+}
+```
+
+```{r}
+ST <- function (data) {
+  SHOWTURTLE(data)
+}
+```
+
+### FORWARD (FD)
+
+Move forward *steps*.
+
+```{r}
+FORWARD <- function (steps, data) {
+  angle <- data$path$rad[data$pos] 
+  x0 <- data$path$x[data$pos]
+  y0 <- data$path$y[data$pos]
+  x1 <- x0 + cos(angle) * steps
+  y1 <- y0 + sin(angle) * steps
+  data <- record_path(data,  x = x1, y = y1, color = data$path_color)
+  data
+}
+```
+
+```{r}
+FD <- function (steps, data) {
+  FORWARD(steps, data)
+}
+```
+
+### BACK (BK)
+
+Move back *steps*.
+
+```{r}
+BACK <- function (steps, data) {
+  FORWARD(-steps, data)
+}
+```
+
+```{r}
+BK <- function (steps, data) {
+  BACK(steps, data)
+}
+```
+
+### LEFT (LT)
+
+Turn left this many degrees. Negative degrees work too, they'll turn it right.
+
+```{r}
+LEFT <- function (degs, data) {
+  data$heading <- data$heading + degs
+  data <- record_path(data, rad = data$heading * pi / 180)
+  data
+}
+```
+
+```{r}
+LT <- function (degs, data) {
+  LEFT(degs, data)
+}
+```
+
+### RIGHT (RT)
+
+Turn right this many degrees.
+
+```{r}
+RIGHT <- function (degs, data) {
+  LEFT(-degs, data)
+}
+```
+
+```{r}
+RT <- function (degs, data) {
+  RIGHT(degs, data)
+}
+```
+
+### SETHEADING (SH)
+
+Turn to an absolute heading of *degrees*.
+
+```{r}
+SETHEADING <- function (deg, data) {
+  data$heading <- deg
+  data <- record_path(data, rad = data$heading * pi / 180)
+  data
+}
+```
+
+```{r}
+SH <- function (deg, data) {
+  SETHEADING(deg, data)
+}
+```
+
+### SETPOS (SP)
+
+Set the position to *x, y* coordinates. These are Cartesian, so 0,0 is the middle of the screen.
+
+```{r}
+SETPOS <- function (x1, y1, data) {
+  data <- record_path(data, x = x1, y = y1, 
+                      color = "transparent")
+  data
+}
+```
+
+```{r}
+SP <- function (x1, y1, data) {
+  SETPOS(x1, y1, data)
+}
+```
+
+### HOME
+
+Move back to the home position.
+
+```{r}
+HOME <- function (data) {
+  SETPOS(x1 = 0, y1 = 0, data)
+}
+```
+
+### SETX (SX)
+
+Set the horizontal position to *x*.
+
+```{r}
+SETX <- function (x1, data) {
+  SETPOS(x1, y1 = data$path$y[data$pos], data)
+}
+```
+
+```{r}
+SX <- function (x1, data) {
+  SETX(x1, data)
+}
+```
+
+### SETY (SY)
+
+Set the vertical position to *y*.
+
+```{r}
+SETY <- function (y1, data) {
+  SETPOS(x1 = data$path$x[data$pos], y1, data)
+}
+```
+
+```{r}
+SY <- function (y1, data) {
+  SETY(y1, data)
+}
+```
+
+## Parsing Prompts
+
+### Single Function Prompt
+
+#### Clean strings
+
+```{r}
+clean_prompt <- function (Prompt) {
+  Prompt <- toupper(Prompt)
+  Prompt <- gsub("\\[", " [ ", Prompt)
+  Prompt <- gsub("\\]", " ] ", Prompt)
+  Prompt <- gsub("\\(\\s+", "(", Prompt)
+  Prompt <- gsub("\\s+\\)", ")", Prompt)
+  Prompt <- gsub("-\\s+", "-", Prompt)  
+  Prompt <- gsub("\\s+", " ", Prompt)
+  Prompt <- trimws(Prompt)
+  Prompt
+}
+```
+
+```{r}
+Test_Prompt = " ( NEW]   -7    "
+clean_prompt(Test_Prompt)
+```
+
+#### Create Call from a String
+
+```{r}
+run_prompt <- function (Prompt, data ) {
+  vec_Prompt <- strsplit(Prompt, " ")[[1]]
+  
+  func <- grep("^[A-Z]+$", vec_Prompt, value = FALSE)
+  value <- grep("^[A-Z]+$", vec_Prompt, value = TRUE)
+  value <- lapply(value, as.name)
+  vec_Prompt[func] <- value
+  
+  num <- grep("^-?[0-9]+$", vec_Prompt, value = FALSE)
+  value <- grep("^-?[0-9]+$", vec_Prompt, value = TRUE)
+  value <- lapply(value, as.numeric)
+  vec_Prompt[num] <- value
+  
+  vec_Prompt <- c(vec_Prompt, as.name("data"))
+  
+  run_Prompt <- as.call(vec_Prompt)
+  eval(run_Prompt)
+}
+```
+
+### Multiple Function Prompt
+
+#### Analyzing and spliting Code
+
+```{r}
+breakup_String <- function(String) {
+  prompts <- clean_prompt(String)
+  prompts <- strsplit(prompts, " ")[[1]]
+  df <- data.frame(code = prompts)
+  n_func <- 0
+  df$n_Func <- rep(0, nrow(df))
+  df$ID_Repeat <- rep(0, nrow(df))
+  df$n_Repeat <- rep(1, nrow(df))
+  
+  ID <- 1
+  brakets <- data.frame(ID = ID,
+                        Status = TRUE,
+                        n = 1)
+  
+  i <- 1
+  imax <- nrow(df) + 1
+  
+  while ( i < imax ) {
+    if ( length(grep("^[A-Z]+$", df$code[i])) > 0 ) {
+      if (df$code[i] == "REPEAT") {
+        n_func <- n_func + 1
+        ID <- ID + 1
+        i = i + 2
+        brakets <- rbind(brakets,
+                         data.frame(ID = ID, 
+                                    Status = TRUE, 
+                                    n = as.numeric(df$code[i - 1])))
+        level <- brakets$ID[max(which(brakets$Status == TRUE))]
+        df$ID_Repeat[i] <- ID
+        df$n_Repeat[i] <- df$code[i - 1]
+      } else { n_func <- n_func + 1 }
+    }
+    
+    if (df$code[i] == "]") {
+      level <- brakets$ID[max(which(brakets$Status == TRUE))]
+      brakets$Status[brakets$ID == level] <- FALSE
+      } else {
+        df$n_Func[i] <- n_func
+        level <- brakets$ID[max(which(brakets$Status == TRUE))]
+        df$ID_Repeat[i] <- brakets$ID[brakets$ID == level]
+        df$n_Repeat[i] <- brakets$n[brakets$ID == level]
+        }
+    i <- i + 1
+  }
+  
+  df_func <- data.frame(ID = 1, Prompt = "", n = 1)
+  func <- rev(unique(df$n_Func[df$n_Func != 0]))
+  for (i in func) {
+    Prompt <- paste(df$code[df$n_Func == i], collapse = " ") 
+    ID <- max(df$ID_Repeat[df$n_Func == i])
+    n <- brakets$n[brakets$ID == ID]
+    df_func <- rbind(data.frame(ID = ID, Prompt = Prompt, n = n), 
+                     df_func)
+    }
+  df_func <- rbind(data.frame(ID = 1, Prompt = "", n = 1),
+                   df_func)
+  return(df_func)
+}
+```
+
+```{r}
+CodeLine <- "fd 2 REPEAT 2 [REPEAT 3 [FD - 1 RT 2] RT 18] "
+CodeLine <- " HT FD 3 ST CS HOME"
+cl_splited <-breakup_String(CodeLine)
+cl_splited
+```
+
+#### Expand Repeats
+
+```{r}
+
+expand_Repeats <- function (splited) {
+  df <- splited
+  IDmax <- max(df$ID)
+  while (IDmax > 1){
+    rID <- range(which(df$ID == IDmax))
+    n <- df$n[rID[1]]
+    
+    middle <- (rID[1] + 1):rID[2]
+    dfm <- df[middle, ]
+    for (i in 2:n) {
+      dfm <- rbind(dfm,df[middle, ])
+      }
+    dfm$ID <- df$ID[rID[1]-1]
+    dfm$n <- df$n[rID[1]-1]
+    
+    before <- 1:(rID[1] - 1)
+    dfb <- df[before, ]
+    
+    after <- (rID[2] + 1):nrow(df)
+    dfa <- df[after, ]
+    
+    df <- rbind(dfb,dfm,dfa)
+    IDmax <- max(df$ID)
+  }
+  return(df$Prompt[df$Prompt != ""])
+}
+```
+
+```{r}
+Prompts <- expand_Repeats(cl_splited)
+Prompts
+```
+
+#### Create Calls from a Vector of Strings
+
+```{r}
+run_prompts <- function (Prompt, data) {
+  df <- breakup_String(Prompt)
+  Prompts <- expand_Repeats(df)
+  for (i in 1:length(Prompts)){
+    data <- run_prompt(Prompts[i], data)
+    }
+  data
+}
+```
+
+## Helper Functions
+
+### New field
+
+Initializing the game
+
+```{r}
+new_field <- function (size) {
+  pos <- 1
+  heading <- 0
+  turtle <- TRUE
+  turtle_color <- "red"
+  path_color <- "blue"
+  path <- data.frame(x = 0, y = 0, rad = 0, 
+                     color = "transparent",
+                     turtle = turtle)
+  field <- NULL
+  data <- list(field = field,
+               size = abs(size),
+               field_name = "Logo",
+               field_dir = "temp/",
+               pos = pos,
+               heading = heading,
+               turtle_color = turtle_color,
+               turtle = turtle,
+               path_color = path_color,
+               path = path)
+  data
+}
+```
+
+### Record Path
+
+```{r}
+record_path <- function (data, x = NULL, y = NULL, rad = NULL, 
+                         color = NULL, turtle = NULL) {
+  newrow <- data$path[data$pos,]
+  if(!is.null(x)) newrow$x <- x
+  if(!is.null(y)) newrow$y <- y
+  if(!is.null(rad)) newrow$rad <- rad
+  if(!is.null(color)) newrow$color <- color
+  if(!is.null(turtle)) newrow$turtle <- turtle
+  data$pos <- data$pos + 1
+  data$path[data$pos,] <- newrow
+  data
+}
+
+```
+
+## Plot Functions
+
+### Field
+
+```{r}
+plot_field <- function (data, stat = NULL) {
+  if(is.null(stat)) stat <- nrow(data$path)
+  maxpath <- ceiling(max(abs(data$path[1:stat,c("x","y")])) * 1.05)
+  data$size <- max(c(data$size, maxpath))
+  png_name <- paste0(data$field_dir,"/",data$field_name,stat,".png")
+  png(png_name, width = 600, height = 600, res = 150)
+  par(mar = c(0.01, 0.01, 0.01, 0.01) * data$size)
+  plot.new()
+  plot.window(xlim = c(-data$size, data$size),
+              ylim = c(-data$size, data$size),
+              asp = 1)
+  box()
+  data
+}
+```
+
+### Path
+
+```{r}
+plot_path <- function (data, stat = NULL) {
+  if(is.null(stat)) stat <- nrow(data$path)
+  if (stat > 1) {
+     for (i in 2:stat) {
+       segments(x0 = data$path$x[i-1], y0 = data$path$y[i-1],
+                x1 = data$path$x[i], y1 = data$path$y[i],
+                col = data$path$color[i], lwd = 2)
+     }
+  }
+  data
+}
+```
+
+### Turtle
+
+```{r}
+plot_turtle <- function (data, stat = NULL) {
+  if(is.null(stat)) stat <- nrow(data$path)
+  show <-  data$path$turtle[stat]
+  if (show) {
+    points(x = data$path$x[stat],
+           y = data$path$y[stat],
+           col = data$turtle_color,
+           pch = 16,
+           cex = 0.02 * data$size)
+    arrow_length <- 0.1 * data$size
+    angle <- data$path$rad[stat]
+    arrows(data$path$x[stat],
+           data$path$y[stat],
+           data$path$x[stat] + cos(angle) * arrow_length,
+           data$path$y[stat] + sin(angle) * arrow_length,
+           col = data$turtle_color,
+           code = 2,
+           length = 0.1,
+           angle = 20,
+           lwd = 2)
+  }
+  dev.off()
+  data
+}
+```
+
+### Stat
+
+```{r}
+plot_stat <- function (data, stat = NULL) {
+  if(is.null(stat)) stat <- nrow(data$path)
+  data <- plot_field(data, stat)
+  data <- plot_path(data, stat)
+  data <- plot_turtle(data, stat)
+}
+```
+
+### Animation
+
+```{r}
+clear_png <- function (data) {
+  png_files <- list.files(path = data$field_dir, 
+                          pattern = "\\.png$", 
+                          full.names = TRUE)
+  file.remove(png_files)
+}
+```
+
+```{r}
+save_png <- function (data, n) {
+  n_png <- ifelse(floor(data$pos/n) > 1,floor(data$pos/n),1)
+  plot_stat(data, stat = 1)
+  for (i in 1:data$pos) {
+    if (i %% n_png == 0) {
+      plot_stat(data, stat = i)
+    }
+  }
+  plot_stat(data, stat = data$pos)
+}
+```
+
+```{r}
+animation_png <- function (data, n) {
+  clear_png(data)
+  save_png(data, n)
+  png_files <- list.files(path = data$field_dir, 
+                          pattern = "\\.png$", 
+                          full.names = TRUE)
+  png_files <- png_files[order(as.numeric(gsub("\\D", "", png_files)))]
+  img_list <- lapply(png_files, image_read) 
+  animation <- image_animate(image_join(img_list), fps = 10) 
+  image_write(animation, "animation.gif")
+  clear_png(data)
+}
+```
+
+## Application
+
+```{r}
+run_LOGO <- function (string) {
+  file_path <- "temp/Logo.rds"
+  dir_path <- dirname(file_path)
+  if (!dir.exists(dir_path)) {
+    dir.create(dir_path, recursive = TRUE)
+    }
+  if (file.exists(file_path)) {
+    data <- readRDS(file_path)
+    } else {
+      data <- new_field(5)
+    }
+  data$field_name <- "Logo"
+  data$field_dir <- paste0(dir_path,"/")
+  data <- run_prompts(string, data)
+  animation_png(data, n = 150)
+  saveRDS(data, file_path)
+}
+
+```
+
+# Run Game
+
+## Example from the homepage
+
+```{r}
+run_LOGO("CS REPEAT 20 [REPEAT 180 [FD 1 RT 2] RT 18]")
+```
+
+![](animation.gif)

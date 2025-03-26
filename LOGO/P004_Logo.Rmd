@@ -1,5 +1,5 @@
 ---
-title: "P003: Logo Repeat"
+title: "P004: Logo as Application"
 author: "Hubert Baechli"
 date: "`r Sys.Date()`"
 ---

@@ -7,6 +7,7 @@ date: "`r Sys.Date()`"
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(magick)
+library(here)
 ```
 
 # Logo
@@ -399,6 +400,7 @@ Initializing the game
 
 ```{r}
 new_field <- function (size) {
+  dir_path <- here("LOGO","temp")
   pos <- 1
   heading <- 0
   turtle <- TRUE
@@ -411,7 +413,7 @@ new_field <- function (size) {
   data <- list(field = field,
                size = abs(size),
                field_name = "Logo",
-               field_dir = "temp/",
+               field_dir = file.path(dir_path),
                pos = pos,
                heading = heading,
                turtle_color = turtle_color,
@@ -449,7 +451,7 @@ plot_field <- function (data, stat = NULL) {
   if(is.null(stat)) stat <- nrow(data$path)
   maxpath <- ceiling(max(abs(data$path[1:stat,c("x","y")])) * 1.05)
   data$size <- max(c(data$size, maxpath))
-  png_name <- paste0(data$field_dir,"/",data$field_name,stat,".png")
+  png_name <- here(data$field_dir, paste0(data$field_name, stat, ".png"))
   png(png_name, width = 600, height = 600, res = 150)
   par(mar = c(0.01, 0.01, 0.01, 0.01) * data$size)
   plot.new()
@@ -550,8 +552,10 @@ animation_png <- function (data, n) {
                           full.names = TRUE)
   png_files <- png_files[order(as.numeric(gsub("\\D", "", png_files)))]
   img_list <- lapply(png_files, image_read) 
-  animation <- image_animate(image_join(img_list), fps = 10) 
-  image_write(animation, "animation.gif")
+  animation <- image_animate(image_join(img_list), 
+                             fps = 10, , loop = 1,
+                             optimize = TRUE) 
+  image_write(animation, here("LOGO","Output_P004.gif"))
   clear_png(data)
 }
 ```
@@ -560,10 +564,10 @@ animation_png <- function (data, n) {
 
 ```{r}
 run_LOGO <- function (string) {
-  file_path <- "temp/Logo.rds"
-  dir_path <- dirname(file_path)
+  file_path <- here("LOGO","temp","Logo.rds")
+  dir_path <- here("LOGO","temp")
   if (!dir.exists(dir_path)) {
-    dir.create(dir_path, recursive = TRUE)
+    dir.create(here("LOGO", "temp"), showWarnings = FALSE)
     }
   if (file.exists(file_path)) {
     data <- readRDS(file_path)
@@ -571,12 +575,11 @@ run_LOGO <- function (string) {
       data <- new_field(5)
     }
   data$field_name <- "Logo"
-  data$field_dir <- paste0(dir_path,"/")
+  data$field_dir <- file.path(dir_path)
   data <- run_prompts(string, data)
   animation_png(data, n = 150)
   saveRDS(data, file_path)
 }
-
 ```
 
 # Run Game
@@ -587,4 +590,4 @@ run_LOGO <- function (string) {
 run_LOGO("CS REPEAT 20 [REPEAT 180 [FD 1 RT 2] RT 18]")
 ```
 
-![](animation.gif)
+![](Output_P004.gif)

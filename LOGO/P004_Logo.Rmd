@@ -410,10 +410,9 @@ new_field <- function (size) {
                      color = "transparent",
                      turtle = turtle)
   field <- NULL
-  data <- list(field = field,
-               size = abs(size),
-               field_name = "Logo",
+  data <- list(field_name = "Logo",
                field_dir = file.path(dir_path),
+               size = abs(size),
                pos = pos,
                heading = heading,
                turtle_color = turtle_color,

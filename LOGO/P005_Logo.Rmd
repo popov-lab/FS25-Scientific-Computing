@@ -1,5 +1,5 @@
 ---
-title: "P004: Logo with Gimmicks"
+title: "P005: Logo with Gimmicks"
 author: "Hubert Baechli"
 date: "`r Sys.Date()`"
 ---
@@ -843,6 +843,8 @@ run_LOGO <- function (string) {
 
 ## Example from the homepage
 
+with some fancy shadow and color effeccts
+
 ```{r}
 run_LOGO("CS  sPc [black] SP [-pi/5] [-Sin(PI/2)/2]")
 run_LOGO("REPEAT 20 [RepeaT 180 [FD 1 RT 2] RT 18]")
@@ -866,6 +868,8 @@ run_LOGO("REPEaT 5 [rEPEAT 360 [fD 0.5 RT 1] RT 72]")
 
 ## Saved Output
 
+you can also save the output (Plot and path) for using and analyzing it later
+
 ```{r}
 run_LOGO("SPEED 10 saVe [Logo01]")
 ```
@@ -874,24 +878,26 @@ run_LOGO("SPEED 10 saVe [Logo01]")
 
 # Other Exercises
 
+Since `n` is also used as a loop variable in my program, handling many other exercises doesn't pose any issues.
+
 <https://softwareprogramming4kids.com/loops-in-logo/>
 
 ```{r}
-run_LOGO("CS REPEAT 200 [FD [N*4] RT 90]")
+run_LOGO("CS REPEAT 150 [FD [N*4] RT 90]")
 run_LOGO("SPEED 1 saVe [Logo02]")
 ```
 
 ![](Logo02.gif)
 
 ```{r}
-run_LOGO("CS REPEAT 80[ FD [n * 5]  RIGHT 144 ]")
+run_LOGO("CS REPEAT 50 [ FD [n * 5]  RIGHT 144 ]")
 run_LOGO("SPEED 1 saVe [Logo03]")
 ```
 
 ![](Logo03.gif)
 
 ```{r}
-run_LOGO("CS REPEAT 500 [ FD [n * 2]  RT 89 ]")
+run_LOGO("CS REPEAT 300 [ FD [n * 2]  RT 89 ]")
 run_LOGO("SPEED 1 saVe [Logo04]")
 ```
 

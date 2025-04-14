@@ -78,10 +78,18 @@ ST <- function (data) {
 Move forward *steps*.
 
 ```{r}
-FORWARD <- function (steps, data) {
+FORWARD <- function (step, data) {
   angle <- data$path$rad[data$pos] 
   x0 <- data$path$x[data$pos]
   y0 <- data$path$y[data$pos]
+  
+  max_step <- 1
+  n_step <- abs(step)%/%(max_step * 1.5) + 1
+  Seq0 <- seq(from = 0, to = 1, by = 1/n_step)
+  Seq0 <- Seq0[-1]
+  steps <- qbeta(Seq0, shape1 = 0.15, shape2 = 0.2)
+  steps <- steps * step
+  
   x1 <- x0 + cos(angle) * steps
   y1 <- y0 + sin(angle) * steps
   data <- record_path(data,  x = x1, y = y1, 
@@ -263,7 +271,7 @@ STC <- function (turtle_color, data) {
 ```{r}
 SETNEWCHUNK <- function (data) {
   data$chunk <- data$chunk + 1
-  data <- record_path(data)
+  data <- record_path(data, chunk = data$chunk)
   data
 }
 ```
@@ -279,7 +287,9 @@ SNC <- function (data) {
 ```{r}
 UNDOCHUNK <- function (data) {
   last_chunk <- max(data$path$chunk)
-  data$path <- data$path[data$path$chunk != last_chunk,]
+  if (last_chunk > 1) {
+    data$path <- data$path[data$path$chunk != last_chunk,]
+  }
   
   data$chunk <- max(data$path$chunk)
   data$pos <- nrow(data$path)
@@ -291,7 +301,13 @@ UNDOCHUNK <- function (data) {
   while (data$path$path_color[last_pos] == "transparent" && last_pos > 0) {
     last_pos <- last_pos - 1
   }
-  data$path_color <- data$path$path_color[last_pos]
+  if (last_pos == 1) {
+    data$path_color <- "blue"
+  } else {
+    data$path_color <- data$path$path_color[last_pos]
+  }
+  
+  data <- REPLOT(data)
   
   data
 }
@@ -307,9 +323,10 @@ UNDO <- function (data) {
 
 ```{r}
 SETSPEED <- function (speed, data) {
-  speed <- pmin(pmax(speed, 1), 100)
+  speed <- pmax(speed, 1)
   speed <- round(speed)
   data$speed <- speed
+  #data <- REPLOT(data)
   data
 }
 ```
@@ -334,6 +351,7 @@ REPLOT <- function (data, chunk = FALSE) {
 SAVEPATH <- function (name, data) {
   name_raw <- paste0(name, ".rds")
   name_gif <- paste0(name, ".gif")
+  data <- REPLOT(data)
   saveRDS(data$path, here("LOGO", name_raw))
   file.copy(from = here("LOGO", "temp", "output.gif"), 
             to = here("LOGO", name_gif), 
@@ -505,7 +523,7 @@ breakup_String <- function(String) {
 ```
 
 ```{r}
-CodeLine <- "save [logo. 10]SP [-pi/5] [- PI / 6] REPeAT 2[FD [-n + Pi grEen] RT 18] fd 2"
+CodeLine <- "FD 100 rT 90 fd 1 RT 90 "
 cl_splited <-breakup_String(CodeLine)
 cl_splited
 ```
@@ -528,32 +546,23 @@ create_Calls <- function (splited) {
                          paste0(c(Code,"data)"), collapse = ","), 
                          Code)) %>%
     ungroup() %>%
-    distinct(Code, ID_Func, Func_Par, .keep_all = TRUE) %>%
+    distinct(Code, ID_Func, ID_Par, Func_Par, .keep_all = TRUE) %>%
   
     group_by(ID_Func) %>%
     mutate(Code = ifelse(n() > 1,
                          paste0(Code, collapse = "("),
                          paste0(Code, "(data)"))) %>%
     ungroup() %>%
+    distinct(Code, ID_Func, .keep_all = TRUE) %>%
     rename(Call = Code, ID = ID_Repeat, n = n_Repeat ) %>%
-    select(Call,ID, n)%>%
-    distinct(Call,ID, n, .keep_all = TRUE)
+    select(Call,ID, n)
   
-  if ( nrow(Calls) > 1 ) {
-      first_call <- data.frame(Call = "SETNEWCHUNK(data)", ID = 1, n = 1)
-      last_call <- data.frame(Call = "PLOT(data)", ID = 1, n = 1)
-      Calls <- rbind(first_call, Calls, last_call)
-  } else {
-    if ( any(grepl("^UN|SPEED|SAVE", Calls$Call)) ) {
-      last_call <- data.frame(Call = "REPLOT(data)", ID = 1, n = 1)
-      Calls <- rbind(Calls, last_call)
-    } else if ( !any(grepl("QUIT", Calls$Call)) ) {
-      last_call <- data.frame(Call = "PLOT(data)", ID = 1, n = 1)
-      Calls <- rbind(Calls, last_call)
-    } else {
-      
-    }
-  }
+  if ( !any(grepl("^UN|SPEED|SAVE|QUIT", Calls$Call)) ) {
+    first_call <- data.frame(Call = "SETNEWCHUNK(data)", ID = 1, n = 1)
+    last_call <- data.frame(Call = "PLOT(data)", ID = 1, n = 1)
+    Calls <- rbind(first_call, Calls, last_call)
+  } 
+  
   Calls
 }
 ```
@@ -643,7 +652,7 @@ new_field <- function (size) {
   speed <- 50
   path <- data.frame(chunk = 1,
                      x = 0, y = 0, rad = 0, 
-                     path_color = path_color,
+                     path_color = "transparent",
                      turtle = turtle,
                      turtle_color = turtle_color)
   field <- NULL
@@ -666,25 +675,33 @@ new_field <- function (size) {
 
 ```{r}
  record_path <- function (data, 
+                          chunk = NULL,
                           x = NULL, 
                           y = NULL, 
                           rad = NULL, 
                           path_color = NULL, 
                           turtle = NULL,
                           turtle_color = NULL) {
-  newrow <- data$path[data$pos,]
-  newrow$chunk <- data$chunk
-  if(!is.null(x)) newrow$x <- x
-  if(!is.null(y)) newrow$y <- y
-  if(!is.null(rad)) newrow$rad <- rad
-  if(!is.null(path_color)) newrow$path_color <- path_color
-  if(!is.null(turtle)) newrow$turtle <- turtle
-  if(!is.null(turtle_color)) newrow$turtle_color <- turtle_color
-  data$pos <- data$pos + 1
-  data$path[data$pos,] <- newrow
-  data
+   
+   temp <- data$pos
+   n <- max(lengths(list(chunk, x, y, rad, path_color, turtle, turtle_color)))
+   
+   template <- data$path[temp, ]
+   newrows <- template[rep(1, n), ]
+   
+   if (!is.null(chunk)) newrows$chunk <- chunk
+   if (!is.null(x)) newrows$x <- x
+   if (!is.null(y)) newrows$y <- y
+   if (!is.null(rad)) newrows$rad <- rad
+   if (!is.null(path_color)) newrows$path_color <- path_color
+   if (!is.null(turtle)) newrows$turtle <- turtle
+   if (!is.null(turtle_color)) newrows$turtle_color <- turtle_color
+   
+   data$path <- rbind(data$path, newrows)
+   rownames(data$path) <- NULL
+   data$pos <- nrow(data$path)
+   data
 }
-
 ```
 
 ## Plot Functions
@@ -694,7 +711,7 @@ new_field <- function (size) {
 ```{r}
 plot_field <- function (data, stat = NULL) {
   if(is.null(stat)) stat <- nrow(data$path)
-  maxpath <- ceiling(max(abs(data$path[1:stat,c("x","y")])) * 1.05)
+  maxpath <- ceiling(max(abs(data$path[1:stat,c("x","y")])) * 1.11)
   data$size <- max(c(data$size, maxpath))
   png_name <- here(data$field_dir, paste0(data$field_name, stat, ".png"))
   png(png_name, width = 600, height = 600, res = 150)
@@ -788,9 +805,10 @@ save_png <- function (data, chunk) {
       rmin <- 2
       rmax <- nrow(data$path)
     }
-  
-  Seq0 <- seq(from = 0, to = 1, by = data$speed/5000)
-  plot_seq <- qbeta(Seq0, shape1 = 0.15, shape2 = 0.15)
+  step <- data$speed/(rmax-rmin)
+  step <- pmin(pmax(step, 1/100), 1)
+  Seq0 <- seq(from = 0, to = 1, by = step)
+  plot_seq <- qbeta(Seq0, shape1 = 0.15, shape2 = 0.2)
   plot_seq <- (rmax - rmin) * plot_seq + rmin
   plot_seq <- round(plot_seq)
   plot_seq <- unique(plot_seq)
@@ -843,21 +861,21 @@ run_LOGO <- function (string) {
 
 ## Example from the homepage
 
-with some fancy shadow and color effeccts
+with some fancy shadow and color effects
 
 ```{r}
-run_LOGO("CS  sPc [black] SP [-pi/5] [-Sin(PI/2)/2]")
+run_LOGO("CS SP [-pi/5] [-Sin(PI/2)/2] sPc [black]")
 run_LOGO("REPEAT 20 [RepeaT 180 [FD 1 RT 2] RT 18]")
+run_LOGO("SPEED 100")
 run_LOGO("Home SpC [gREEN] StC [blue]")
 run_LOGO("REPEaT 20.1 [rEPEAT 180 [fD 1 RT 2] RT 18]")
 run_LOGO("UndoChunk")
 run_LOGO("SpC [blue] StC [green]")
-run_LOGO("REPEaT 5 [rEPEAT 360 [fD 0.5 RT 1] RT 72]")
-run_LOGO("SPEED 100")
+run_LOGO("REPEaT 5 [rEPEAT 180 [fD 1 RT 2] RT 72]")
 run_LOGO("SpC [green] StC [red] rt 18")
-run_LOGO("REPEaT 5 [rEPEAT 360 [fD 0.5 RT 1] RT 72]")
+run_LOGO("REPEaT 5 [rEPEAT 180 [fD 1 RT 2] RT 72]")
 run_LOGO("SpC [yellow] rt 18")
-run_LOGO("REPEaT 5 [rEPEAT 360 [fD 0.5 RT 1] RT 72]")
+run_LOGO("REPEaT 5 [rEPEAT 180 [fD 1 RT 2] RT 72]")
 run_LOGO("SpC [red] rt 18 ht")
 run_LOGO("REPEaT 5 [rEPEAT 360 [fD 0.5 RT 1] RT 72]")
 ```
@@ -871,7 +889,7 @@ run_LOGO("REPEaT 5 [rEPEAT 360 [fD 0.5 RT 1] RT 72]")
 you can also save the output (Plot and path) for using and analyzing it later
 
 ```{r}
-run_LOGO("SPEED 10 saVe [Logo01]")
+run_LOGO("SPEED 1 saVe [Logo01]")
 ```
 
 ![](Logo01.gif)
@@ -883,7 +901,7 @@ Since `n` is also used as a loop variable in my program, handling many other exe
 <https://softwareprogramming4kids.com/loops-in-logo/>
 
 ```{r}
-run_LOGO("CS REPEAT 150 [FD [N*4] RT 90]")
+run_LOGO("CS REPEAT 80 [FD [N*2^(N/40)] RT 90]")
 run_LOGO("SPEED 1 saVe [Logo02]")
 ```
 
@@ -897,7 +915,7 @@ run_LOGO("SPEED 1 saVe [Logo03]")
 ![](Logo03.gif)
 
 ```{r}
-run_LOGO("CS REPEAT 300 [ FD [n * 2]  RT 89 ]")
+run_LOGO("CS REPEAT 100 [ FD [n * 2]  RT 91 ]")
 run_LOGO("SPEED 1 saVe [Logo04]")
 ```
 

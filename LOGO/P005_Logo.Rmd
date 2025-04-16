@@ -287,8 +287,12 @@ SNC <- function (data) {
 ```{r}
 UNDOCHUNK <- function (data) {
   last_chunk <- max(data$path$chunk)
-  if (last_chunk > 1) {
+  if (last_chunk > 2) {
     data$path <- data$path[data$path$chunk != last_chunk,]
+  } else {
+    data <- CLEARSCREEN(data) 
+    data <- REPLOT(data)
+    return(data)
   }
   
   data$chunk <- max(data$path$chunk)
@@ -523,7 +527,7 @@ breakup_String <- function(String) {
 ```
 
 ```{r}
-CodeLine <- "FD 100 rT 90 fd 1 RT 90 "
+CodeLine <- "CS SP [-pi/5] [-Sin(PI/2)/2] sPc [black]"
 cl_splited <-breakup_String(CodeLine)
 cl_splited
 ```
@@ -546,7 +550,7 @@ create_Calls <- function (splited) {
                          paste0(c(Code,"data)"), collapse = ","), 
                          Code)) %>%
     ungroup() %>%
-    distinct(Code, ID_Func, ID_Par, Func_Par, .keep_all = TRUE) %>%
+    distinct(Code, ID_Func, Func_Par, .keep_all = TRUE) %>%
   
     group_by(ID_Func) %>%
     mutate(Code = ifelse(n() > 1,
@@ -643,7 +647,7 @@ Initializing the game
 ```{r}
 new_field <- function (size) {
   dir_path <- here("LOGO","temp")
-  chunk <- 1
+  chunk <- 0
   pos <- 1
   heading <- 0
   turtle <- TRUE
@@ -667,6 +671,7 @@ new_field <- function (size) {
                path_color = path_color,
                speed = speed,
                path = path)
+  data <- SETNEWCHUNK(data)
   data
 }
 ```
@@ -900,26 +905,62 @@ Since `n` is also used as a loop variable in my program, handling many other exe
 
 <https://softwareprogramming4kids.com/loops-in-logo/>
 
+## Exercise 1:
+
 ```{r}
-run_LOGO("CS REPEAT 80 [FD [N*2^(N/40)] RT 90]")
+run_LOGO("CS")
+run_LOGO("REPEAT 80 [FD [N*2] RT 90]")
+run_LOGO("undo")
+run_LOGO("REPEAT 80 [FD [N*2^(N/40)] RT 90]")
+```
+### Working Output
+
+![](temp/Output.gif)
+
+### Saved Output
+
+```{r}
 run_LOGO("SPEED 1 saVe [Logo02]")
 ```
 
 ![](Logo02.gif)
 
+## Exercise 2:
+
 ```{r}
 run_LOGO("CS REPEAT 50 [ FD [n * 5]  RIGHT 144 ]")
+```
+
+### Working Output
+
+![](temp/Output.gif)
+
+### Saved Output
+
+```{r}
 run_LOGO("SPEED 1 saVe [Logo03]")
 ```
 
 ![](Logo03.gif)
 
+## Exercise 3:
+
 ```{r}
-run_LOGO("CS REPEAT 100 [ FD [n * 2]  RT 91 ]")
+run_LOGO("CS REPEAT 150 [ FD [n * 2]  RT 91 ]")
+```
+
+### Working Output
+
+![](temp/Output.gif)
+
+### Saved Output
+
+```{r}
 run_LOGO("SPEED 1 saVe [Logo04]")
 ```
 
 ![](Logo04.gif)
+# Quit LOGO
 
 ```{r}
 run_LOGO("QUIT")

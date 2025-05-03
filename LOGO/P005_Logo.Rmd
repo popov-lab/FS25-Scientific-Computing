@@ -913,6 +913,7 @@ run_LOGO("REPEAT 80 [FD [N*2] RT 90]")
 run_LOGO("undo")
 run_LOGO("REPEAT 80 [FD [N*2^(N/40)] RT 90]")
 ```
+
 ### Working Output
 
 ![](temp/Output.gif)

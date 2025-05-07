@@ -1,0 +1,244 @@
+---
+title: "E006: Optimizations"
+author: "Hubert Baechli"
+date: "2025-03-08"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(bench)
+GAP <- 1
+```
+
+::: callout-warning
+This set of exercises is not fully ready and will be improved over the next few days. Do at your own risk ;)
+:::
+
+# Programming exercise
+
+These exercises should help you write faster, more efficient code. So this exercises are inspired by both your LOGO code and mine (<https://hubiatgit.github.io/Starting_Github/LOGO/LOGO_Hubi.html>).
+
+**Goal:** Improve the performance of the code below by creating more efficient functions.
+
+::: callout-tip
+For testing the speed you have to install the package "bench"
+
+*see also <https://adv-r.hadley.nz/perf-measure.html>*
+:::
+
+**Data frame for testing the speed**
+
+```{r}
+hist <- data.frame(angle = seq(0, 360, 0.1))
+hist$x <- 5 * cos(hist$angle / 180 * pi )
+hist$y <- 5 * sin(hist$angle / 180 * pi )
+hist$color <- sample(colors(), size = nrow(hist), replace = TRUE)
+hist$color[sample(1:50, 1)] <- "red"
+
+head(hist)
+```
+
+## 1. Constants
+
+Doing things only ones if possible, means pre calculate often used numbers.
+
+```{r}
+new_pos <- function(x, y, hist) {
+  new_x <- hist$x[[length(hist$x)]] + 2/3 * cos(hist$angle[nrow(hist)] * (pi / 180))
+  new_y <- hist$y[[length(hist$y)]] + 2/3 * sin(hist$angle[nrow(hist)] * (pi / 180))
+  return(c(new_x, new_y))
+}
+
+new_pos(10, 3, hist)
+```
+
+```{r, echo=FALSE}
+new_pos_fast <- function(x, y, hist) {
+  pos <- nrow(hist)
+  rad <- hist$angle[pos] * (pi / 180)
+  step <- 2/3
+  new_x <- hist$x[pos] + step * cos(rad)
+  new_y <- hist$y[pos] + step * sin(rad)
+  return(c(new_x, new_y))
+}
+```
+
+**Speed-test:**
+
+```{r}
+bench::mark(
+  slow = new_pos(10, 3, hist),
+  fast = new_pos_fast(10, 3, hist)
+)
+```
+
+## 2. Early returns
+
+Stop searching as soon as you've found what you're looking for. This idea can also be applied to a series of if-statements.
+
+```{r}
+find_first_red <- function(hist) {
+ 
+  i <- 1
+  res <- c() 
+  
+  while (i <= nrow(hist)) {
+    if (hist$color[i] == "red") {
+      res <- c(res, i)
+    }
+    i <- i + 1
+  }
+  return(max(min(res),0))
+}
+
+find_first_red(hist)
+```
+
+```{r, echo=FALSE}
+find_first_red_fast <- function(hist) {
+  
+  i <- 1
+  
+  while (i <= nrow(hist)) {
+    if (hist$color[i] == "red") {
+      return(i)
+    }
+    i <- i + 1
+  }
+  return(0)
+}
+
+```
+
+**Speed-test:**
+
+```{r}
+bench::mark(
+  slow = find_first_red(hist),
+  fast = find_first_red_fast(hist)
+)
+```
+
+## 3. Omit Loops
+
+Almost all functions in R can handle vector inputs. This means that loops aren’t truly avoided, but they are executed at the much faster underlying machine level.
+
+```{r}
+replot_hist <- function(hist) {
+
+  plot(NULL,xlim = range(hist$x), ylim = range(hist$y), asp = 1)
+  
+  for (i in 2:nrow(hist)) {
+    segments(x0 = hist$x[i - 1], 
+             y0 = hist$y[i - 1],
+             x1 = hist$x[i], 
+             y1 = hist$y[i],
+             col = hist$color[i])
+  }
+}
+replot_hist(hist)
+```
+
+```{r, echo=FALSE}
+replot_hist_fast <- function(hist) {
+  pos <- nrow(hist)
+
+  plot(NULL,xlim = range(hist$x), ylim = range(hist$y), asp = 1)
+  
+  segments(x0 = hist$x[-pos], 
+           y0 = hist$y[-pos],
+           x1 = hist$x[-1], 
+           y1 = hist$y[-1],
+           col = hist$color[-1])
+}
+```
+
+**Speed-test:**
+
+```{r}
+bench::mark(
+  slow = replot_hist(hist),
+  fast = replot_hist_fast(hist)
+)
+```
+
+## 4. Growing objects
+
+Last but in my code possibly the worst: appending rows to an existing list or data frame using append(), c(old, new), or even rbind().
+
+::: callout-tip
+You will find better, faster ways to do this in <https://www.burns-stat.com/pages/Tutor/R_inferno.pdf>.
+:::
+
+```{r}
+add_line <- function(x, y , hist) {
+
+  last_angle <- hist$angle[length(hist$angle)]
+  last_color <- hist$color[length(hist$color)]
+
+  new_row <- data.frame(
+    angle = last_angle,
+    x = x,
+    y = y,
+    color = last_color
+  )
+  
+  hist <- rbind(hist, new_row)
+  hist
+}
+
+tail(add_line(3,10,hist))
+```
+
+```{r, echo=FALSE}
+add_line_fast <- function(x, y , hist) {
+  pos <- nrow(hist)
+  
+  hist[pos + 1, ] <- list(
+    angle = hist$angle[pos],
+    x = x,
+    y = y,
+    color = hist$color[pos]
+  )
+  hist
+}
+```
+
+**Speed-test:**
+
+```{r}
+bench::mark(
+  slow = add_line(3, 10, hist),
+  fast = add_line_fast(3, 10, hist)
+)
+```
+
+## 5. Logo
+
+Now try to make your own Logo code faster. To begin, you might want to start by profiling your code, as described here: <https://adv-r.hadley.nz/perf-measure.html>
+
+::: callout-tip
+For this, you'll need a plain R script, which you can create like this:
+
+```{r, eval = FALSE}
+library(profvis)
+library(bench)
+library(knitr)
+
+# convert your file to a R Script
+purl("LOGO/LOGO_Hubi.qmd", output = "LOGO/LOGO_profiling.R")
+
+# loading this file as a source
+source("LOGO/LOGO_profiling.R")
+
+# then run your logo inside profvis()
+profvis(run_LOGO("CS SP [-pi/5] [-Sin(PI/2)/2] sPc [black]
+                 REPEAT 20 [RepeaT 180 [FD 1 RT 2] RT 18]
+                 SPEED 100
+                 Home SpC [gREEN] StC [blue]
+                 REPEaT 20.1 [rEPEAT 180 [fD 1 RT 2] RT 18]
+                 UndoChunk
+                 CS REPEAT 150 [ FD [n * 2]  RT 91 ]
+                 SPEED 1 saVe [Logo04]"))
+```
+:::

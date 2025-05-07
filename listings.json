@@ -6,20 +6,21 @@
     ]
   },
   {
+    "listing": "/slides.html",
+    "items": [
+      "/slides/week1.html",
+      "/slides/week3.html"
+    ]
+  },
+  {
     "listing": "/exercises.html",
     "items": [
       "/exercises/E001_calculating_pi.html",
       "/exercises/E002_manipulating_strings.html",
       "/exercises/E003_rounding_numbers.html",
       "/exercises/E004_sequences.html",
-      "/exercises/E005_curves_plots.html"
-    ]
-  },
-  {
-    "listing": "/slides.html",
-    "items": [
-      "/slides/week1.html",
-      "/slides/week3.html"
+      "/exercises/E005_curves_plots.html",
+      "/exercises/E006_optimizations.html"
     ]
   }
 ]
